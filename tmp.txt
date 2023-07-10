@@ -1,4 +1,4 @@
-1.npm install - for install module
+npm1.npm install - for install module
 2.npm start - run project 
 3.git clone --
 4.git status

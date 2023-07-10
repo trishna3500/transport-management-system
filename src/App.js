@@ -5,6 +5,7 @@ import {
 import { useAuth } from "./context/AuthContext";
 import AdminPanelPage from "./pages/AdminPanelPage";
 import { default as BusRequisition } from "./pages/BusRequisitionPage";
+import DriverInfoPage from "./pages/DriverInfoPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ViewRequisitionPage from "./pages/ViewRequisitionPage";
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/requisition" element={<BusRequisition />} />
+      <Route path="/driver" element={<DriverInfoPage />} />
     {currentUser ?
       (
         <>
