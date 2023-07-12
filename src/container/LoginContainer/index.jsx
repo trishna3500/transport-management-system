@@ -1,7 +1,7 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth, AuthContext } from "../../context/AuthContext";
 
 export default function LoginContainer() {
   const navigates = useNavigate();
@@ -13,18 +13,14 @@ export default function LoginContainer() {
 
   console.log(errorType);
 
-  const authContext = useAuth();
-
-  console.log(authContext);
-
-  const { Login } = authContext;
+  const { googleSignIn, userSignIn, loading } = useContext(AuthContext);
 
   async function onFormSubmit(e) {
     e.preventDefault();
     console.log(email, password);
 
     try {
-      await Login(email, password);
+      await userSignIn(email, password);
 
       navigates("/admin");
       setShow(true);

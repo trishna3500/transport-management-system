@@ -1,7 +1,7 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Fragment } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { Fragment, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -13,7 +13,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const { currentUser, Logout } = useAuth();
+  const { user, logout } = useContext(AuthContext);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -124,7 +124,7 @@ export default function Navbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <button
-                            onClick={Logout}
+                            onClick={logout}
                             className={classNames(
                               active ? "bg-gray-100 w-full text-left" : "",
                               "block px-4 py-2 text-sm text-gray-700"

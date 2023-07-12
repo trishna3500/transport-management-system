@@ -1,6 +1,6 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DatabaseContext";
 import EditScheduleModal from "../Modal";
 
@@ -9,7 +9,7 @@ function classNames(...classes) {
 }
 
 export default function Schedule({ data, special, title }) {
-  let { currentUser } = useAuth();
+  const { user, logout } = useContext(AuthContext);
   let { deleteSchedule } = useData();
   let [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +44,7 @@ export default function Schedule({ data, special, title }) {
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Bus No.
               </th>
-              {currentUser ? (
+              {user ? (
                 <>
                   <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                     Edit
@@ -92,7 +92,7 @@ export default function Schedule({ data, special, title }) {
                       </p>
                     </span>
                   </td>
-                  {currentUser ? (
+                  {user ? (
                     <>
                       {" "}
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

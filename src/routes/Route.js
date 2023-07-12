@@ -6,6 +6,7 @@ import ViewRequisitionPage from "../pages/ViewRequisitionPage";
 import AdminPanelPage from "../pages/AdminPanelPage";
 import { default as BusRequisition } from "../pages/BusRequisitionPage";
 import DriverInfoPage from "../pages/DriverInfoPage";
+import SignUp from "../components/UI/SignUp";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "/signin",
         element: <LoginPage></LoginPage>,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
       },
       {
         path: "/view-requisition",

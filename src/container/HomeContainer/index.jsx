@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Schedule from "../../components/Table";
-import { useAuth } from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DatabaseContext";
+import { useContext } from "react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -9,7 +10,7 @@ function classNames(...classes) {
 
 export default function HomeContainer() {
   let { alldata } = useData();
-  let { currentUser } = useAuth();
+  const { user, logout } = useContext(AuthContext);
   let navigate = useNavigate();
 
   let fromcampus = alldata.filter(function checkAdult(type) {
@@ -39,23 +40,23 @@ export default function HomeContainer() {
             <div className="flex justify-end space-x-5">
               <button
                 className={classNames(
-                  currentUser ? " bg-lime-300 " : " bg-yellow-300",
+                  user ? " bg-lime-300 " : " bg-yellow-300",
                   "text-black rounded-md px-4 py-2"
                 )}
-                onClick={() => navigate(currentUser ? "/admin" : "/signin")}
+                onClick={() => navigate(user ? "/admin" : "/signin")}
               >
-                {currentUser ? "Profile" : "Login"}
+                {user ? "Profile" : "Login"}
               </button>
               <button
                 className={classNames(
-                  currentUser ? " bg-red-600 " : " bg-yellow-300",
+                  user ? " bg-red-600 " : " bg-yellow-300",
                   "text-black rounded-md px-4 py-2"
                 )}
                 onClick={() =>
-                  navigate(currentUser ? "/view-requisition" : "/requisition")
+                  navigate(user ? "/view-requisition" : "/requisition")
                 }
               >
-                {currentUser ? "  View Bus Requisition" : "Bus Requisition"}
+                {user ? "  View Bus Requisition" : "Bus Requisition"}
               </button>
               <button
                 className={classNames(
