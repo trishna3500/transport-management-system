@@ -1,8 +1,4 @@
-import { Navigate, Route, RouterProvider, Routes } from "react-router-dom";
-import { useAuth } from "./context/AuthContext";
-import AdminPanelPage from "./pages/AdminPanelPage";
-import { default as BusRequisition } from "./pages/BusRequisitionPage";
-
+import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/Route";
 
 function App() {

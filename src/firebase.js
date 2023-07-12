@@ -6,23 +6,21 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAlUL608IRG0btSF_nCDss4UNM6ZUOoLXI",
-  authDomain: "transport-management-sys-46540.firebaseapp.com",
-  databaseURL: "https://transport-management-sys-46540-default-rtdb.firebaseio.com",
-  projectId: "transport-management-sys-46540",
-  storageBucket: "transport-management-sys-46540.appspot.com",
-  messagingSenderId: "373593541398",
-  appId: "1:373593541398:web:2d370102bfac496fdade37",
-  measurementId: "G-NGZK16MK2J"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
-
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const fsDb = getFirestore(app);
 const storage = getStorage(app);
-const rtDb = getDatabase(app)
+const rtDb = getDatabase(app);
 
 export { analytics, auth, fsDb, rtDb, storage };
-
