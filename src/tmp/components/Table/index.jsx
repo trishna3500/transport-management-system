@@ -6,7 +6,7 @@ export default function Schedule(data, deleteSchedule) {
 
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto mt-20">
-      <h1>From Campus</h1>
+      <h1>Frommmm Campus</h1>
       <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
         <table className="min-w-full leading-normal">
           <thead>

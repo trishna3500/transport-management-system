@@ -46,9 +46,11 @@ export default function HomeContainer() {
                   currentUser ? " bg-lime-300 " : " bg-yellow-300",
                   "text-black rounded-md px-4 py-2"
                 )}
-                onClick={() => navigate(currentUser ? "/admin" : "/signin")}
+                onClick={() =>
+                  navigate(currentUser ? "/add-schedule" : "/signin")
+                }
               >
-                {currentUser ? "Profile" : "Login"}
+                {currentUser ? "Add Schedule" : "Login"}
               </button>
               <button
                 className={classNames(
@@ -63,7 +65,7 @@ export default function HomeContainer() {
           </div>
           {/* from campus  */}
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto mt-20">
-            <h1>From Campus</h1>
+            <h1>Frommmmmm Campus</h1>
             <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
               <table className="min-w-full leading-normal">
                 <thead>

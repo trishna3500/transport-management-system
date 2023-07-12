@@ -7,6 +7,9 @@ import AdminPanelPage from "../pages/AdminPanelPage";
 import { default as BusRequisition } from "../pages/BusRequisitionPage";
 import DriverInfoPage from "../pages/DriverInfoPage";
 import SignUp from "../components/UI/SignUp";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import AddBusSchedule from "../container/AdminContainer/BusSchedule";
 
 export const router = createBrowserRouter([
   {
@@ -26,12 +29,22 @@ export const router = createBrowserRouter([
         element: <SignUp></SignUp>,
       },
       {
+        path: "/teacher-signup",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <SignUp></SignUp>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/view-requisition",
         element: <ViewRequisitionPage></ViewRequisitionPage>,
       },
       {
-        path: "/admin",
-        element: <AdminPanelPage></AdminPanelPage>,
+        path: "/add-schedule",
+        element: <AddBusSchedule></AddBusSchedule>,
       },
       {
         path: "/requisition",

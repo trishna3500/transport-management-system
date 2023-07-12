@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useData } from "../../context/DatabaseContext";
 
-export default function BusSchedule() {
+export default function AddBusSchedule() {
   let [trip, setTrip] = useState();
   let [time, setTime] = useState("");
   let [bus, setBus] = useState("");

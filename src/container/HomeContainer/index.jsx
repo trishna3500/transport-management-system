@@ -2,13 +2,23 @@ import { useNavigate } from "react-router-dom";
 import Schedule from "../../components/Table";
 import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DatabaseContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function HomeContainer() {
+  const [busSchedule, setBusSchedule] = useState();
+  useEffect(() => {
+    fetch("http://localhost:5000/api/v1/all-bus")
+      .then((res) => res.json())
+      .then((data) => setBusSchedule(data));
+  }, []);
+  const studentFromShohor = busSchedule?.data?.filter(
+    (bus) => bus.busType === "student"
+  );
+  console.log(studentFromShohor);
   let { alldata } = useData();
   const { user, logout } = useContext(AuthContext);
   let navigate = useNavigate();
@@ -43,9 +53,9 @@ export default function HomeContainer() {
                   user ? " bg-lime-300 " : " bg-yellow-300",
                   "text-black rounded-md px-4 py-2"
                 )}
-                onClick={() => navigate(user ? "/admin" : "/signin")}
+                onClick={() => navigate(user ? "/add-schedule" : "/signin")}
               >
-                {user ? "Profile" : "Login"}
+                {user ? "Add Schedule" : "Login"}
               </button>
               <button
                 className={classNames(
@@ -75,11 +85,14 @@ export default function HomeContainer() {
 
           {/* special trip  */}
           <div className="mt-10">
-            <h1 className="text-xl font-bold">Special Trip</h1>
+            <h1 className="text-xl font-bold">Speciallll Trip</h1>
           </div>
           {/* special campus  */}
           <Schedule data={sfromcampus} special={true} title="From Campus" />
           {/* special shohor  */}
+          {studentFromShohor?.map((buses) => (
+            <h1>Hello</h1>
+          ))}
           <Schedule data={sfromshohor} special={true} title="From Shohor" />
         </div>
       </div>
