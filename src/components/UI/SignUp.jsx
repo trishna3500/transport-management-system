@@ -76,7 +76,7 @@ const SignUp = () => {
                       <input
                         type="radio"
                         name="DeliveryOption"
-                        value="Student"
+                        value="student"
                         id="DeliveryStandard"
                         class="peer hidden"
                         onClick={(e) => setRole(e.target.value)}
