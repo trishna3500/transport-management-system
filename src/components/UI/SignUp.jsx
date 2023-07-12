@@ -4,7 +4,7 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const [role, setRole] = useState("Seller");
+  const [role, setRole] = useState("student");
   const { userSignUp } = useContext(AuthContext);
   const auth = getAuth();
   const navigate = useNavigate();
@@ -13,58 +13,40 @@ const SignUp = () => {
     event.preventDefault();
     const form = event.target;
     const fullName = form.fullName.value;
+    const studentID = form.studentID.value;
     const email = form.email.value;
     const password = form.password.value;
-    const confirmPassword = form.passwordConfirmation.value;
-    console.log(fullName, email, password, confirmPassword);
+    const phoneNumber = form.phoneNumber.value;
+    console.log(fullName, studentID, email, password, phoneNumber);
 
-    // Image upload section here
-    const image = form.image.files[0];
-    const formData = new FormData();
-    formData.append("image", image);
-    console.log(formData);
-    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMG_BB_KEY}`;
-
-    fetch(url, {
+    const userInfo = {
+      name: fullName,
+      email: email,
+      role: role,
+      studentID: studentID,
+      phoneNumber: phoneNumber,
+      password: password,
+    };
+    fetch(`http://localhost:5000/api/v1/user`, {
       method: "POST",
-      body: formData,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
     })
       .then((res) => res.json())
-      .then((imgData) => {
-        if (imgData.success) {
-          const userInfo = {
-            name: fullName,
-            email: email,
-            role: role,
-            image: imgData.data.url,
-          };
-          fetch(`http://localhost:5000/userInfo`, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(userInfo),
-          })
-            .then((res) => res.json())
-            .then((data) => console.log(data));
-        }
-      });
+      .then((data) => console.log(data));
 
-    // console.log(postImage);
-    if (password === confirmPassword) {
-      userSignUp(email, password)
-        .then((result) => {
-          const user = result.user;
-          console.log(user);
-          updateProfile(auth.currentUser, {
-            displayName: fullName,
-          }).catch((error) => console.log(error));
-          navigate("/");
-        })
-        .catch((error) => console.log(error));
-    } else {
-      console.log("Password didn't match");
-    }
+    userSignUp(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        updateProfile(auth.currentUser, {
+          displayName: fullName,
+        }).catch((error) => console.log(error));
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div>
@@ -82,7 +64,7 @@ const SignUp = () => {
           >
             <div class="max-w-xl lg:max-w-3xl">
               <form
-                // onSubmit={handleSignUp}
+                onSubmit={handleSignUp}
                 action="#"
                 class="mt-8 grid grid-cols-6 gap-6"
               >
@@ -97,7 +79,7 @@ const SignUp = () => {
                         value="Student"
                         id="DeliveryStandard"
                         class="peer hidden"
-                        // onClick={(e) => setRole(e.target.value)}
+                        onClick={(e) => setRole(e.target.value)}
                       />
 
                       <label
@@ -122,6 +104,20 @@ const SignUp = () => {
                     type="text"
                     id="fullName"
                     name="fullName"
+                    required
+                    class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  />
+                  <label
+                    for="phoneNumber"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Phone Number <span className="text-red-600 text-lg">*</span>
+                  </label>
+
+                  <input
+                    type="number"
+                    id="phoneNumber"
+                    name="phoneNumber"
                     required
                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
@@ -167,24 +163,6 @@ const SignUp = () => {
                     type="password"
                     id="Password"
                     name="password"
-                    required
-                    class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                  />
-                </div>
-
-                <div class="col-span-6 sm:col-span-3">
-                  <label
-                    for="PasswordConfirmation"
-                    class="block text-sm font-medium text-gray-700"
-                  >
-                    Password Confirmation{" "}
-                    <span className="text-red-600 text-lg">*</span>
-                  </label>
-
-                  <input
-                    type="password"
-                    id="Passwordconfirmation"
-                    name="passwordConfirmation"
                     required
                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
