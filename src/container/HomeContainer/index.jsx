@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Schedule from "../../components/Table";
+import Schedule, { TableBody } from "../../components/Table";
 import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DatabaseContext";
 import { useContext, useEffect, useState } from "react";
@@ -90,9 +90,12 @@ export default function HomeContainer() {
           {/* special campus  */}
           <Schedule data={sfromcampus} special={true} title="From Campus" />
           {/* special shohor  */}
-          {studentFromShohor?.map((buses) => (
-            <h1>Hello</h1>
-          ))}
+          <Schedule>
+            {studentFromShohor?.map((buses) => (
+              <TableBody></TableBody>
+            ))}
+          </Schedule>
+
           <Schedule data={sfromshohor} special={true} title="From Shohor" />
         </div>
       </div>
