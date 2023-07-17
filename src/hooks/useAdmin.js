@@ -10,8 +10,8 @@ const useAdmin = (email) => {
       fetch(`http://localhost:5000/api/v1/users/${email}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.data[0].email);
-          if (data.data[0].email === user?.email) {
+          console.log(data.data[0], user.email);
+          if (data.data[0].role === "admin") {
             setIsAdmin(true);
             setIsAdminLoading(false);
           }

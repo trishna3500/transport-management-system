@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DatabaseContext";
 import { useContext } from "react";
+import useAdmin from "../../hooks/useAdmin";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -9,7 +10,9 @@ function classNames(...classes) {
 
 export default function Navbar2() {
   let { alldata } = useData();
+
   const { user, logout } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
   let navigate = useNavigate();
   return (
     <>
@@ -25,21 +28,33 @@ export default function Navbar2() {
                   user ? " bg-lime-300 " : " bg-yellow-300",
                   "text-black rounded-md px-4 py-2"
                 )}
-                onClick={() => navigate(user ? "/admin" : "/signin")}
+                onClick={() => navigate(user ? "/add-schedule" : "/signin")}
               >
-                {user ? "Profile" : "Login"}
+                {user ? "Add Schedule" : "Login"}
               </button>
-              <button
-                className={classNames(
-                  user ? " bg-red-600 " : " bg-yellow-300",
-                  "text-black rounded-md px-4 py-2"
-                )}
-                onClick={() =>
-                  navigate(user ? "/view-requisition" : "/requisition")
-                }
-              >
-                {user ? "  View Bus Requisition" : "Bus Requisition"}
-              </button>
+
+              {isAdmin && (
+                <button
+                  className={classNames(
+                    user ? " bg-red-600 " : " bg-yellow-300",
+                    "text-black rounded-md px-4 py-2"
+                  )}
+                  onClick={() =>
+                    navigate(user ? "/view-requisition" : "/requisition")
+                  }
+                >
+                  View Bus Requisition
+                </button>
+              )}
+
+              {user?.email && (
+                <Link to="/requisition">
+                  <button className="bg-sky-400 px-8 py-2">
+                    Make Requisition
+                  </button>
+                </Link>
+              )}
+
               <button
                 className={classNames(
                   "text-black bg-lime-700 rounded-md px-4 py-2"

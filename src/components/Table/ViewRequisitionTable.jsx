@@ -25,13 +25,7 @@ export default function ViewRequisitionTable({ data }) {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
   console.log(user, isAdmin);
-  function handleEdit(item) {
-    let update = {
-      ...item,
-      status: item.status === "false" ? "true" : "false",
-    };
-    editRequisition(item.id, update);
-  }
+  const [status, setStatus] = useState(true);
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/api/v1/delete-requisition/${id}`, {
       method: "DELETE",
@@ -57,6 +51,7 @@ export default function ViewRequisitionTable({ data }) {
       .then((data) => {
         console.log(data);
         toast.success("Updated User Status");
+        setStatus(false);
       });
   };
   return (
@@ -137,12 +132,11 @@ export default function ViewRequisitionTable({ data }) {
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <button
                       onClick={() => handleEditStatus(item._id)}
-                      className={classNames(
-                        item.isVerified === "false"
-                          ? "text-yellow-700"
-                          : "text-lime-600",
-                        "whitespace-no-wrap"
-                      )}
+                      className={
+                        item.isVerified === "true"
+                          ? "text-lime-600"
+                          : "text-yellow-700"
+                      }
                     >
                       {item.status === "false" ? (
                         <XCircleIcon className="w-6" />

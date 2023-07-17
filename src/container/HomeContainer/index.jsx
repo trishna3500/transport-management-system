@@ -19,10 +19,15 @@ export default function HomeContainer() {
       .then((res) => res.json())
       .then((data) => setBusSchedule(data));
   }, []);
+
   const studentFromShohor = busSchedule?.data?.filter(
     (bus) => bus.busType === "student"
   );
-  console.log(studentFromShohor);
+  const teacherFromShohor = busSchedule?.data?.filter(
+    (bus) => bus.busType === "student"
+  );
+  const fridayBus = busSchedule?.data?.filter((bus) => bus.day === "Friday");
+  console.log(studentFromShohor, teacherFromShohor);
   let { alldata } = useData();
 
   let navigate = useNavigate();
@@ -61,18 +66,21 @@ export default function HomeContainer() {
               >
                 {user ? "Add Schedule" : "Login"}
               </button>
-              <button
-                className={classNames(
-                  user ? " bg-red-600 " : " bg-yellow-300",
-                  "text-black rounded-md px-4 py-2"
-                )}
-                onClick={() =>
-                  navigate(user ? "/view-requisition" : "/requisition")
-                }
-              >
-                {isAdmin && "  View Bus Requisition"}
-                {user?.email && "Bus Requisition"}
-              </button>
+
+              {isAdmin && (
+                <button
+                  className={classNames(
+                    user ? " bg-red-600 " : " bg-yellow-300",
+                    "text-black rounded-md px-4 py-2"
+                  )}
+                  onClick={() =>
+                    navigate(user ? "/view-requisition" : "/requisition")
+                  }
+                >
+                  View Bus Requisition
+                </button>
+              )}
+
               {user?.email && (
                 <Link to="/requisition">
                   <button className="bg-sky-400 px-8 py-2">
@@ -94,7 +102,11 @@ export default function HomeContainer() {
           {/* from campus  */}
           <Schedule data={fromcampus} special={false} title="From Campus" />
           {/* from sohor  */}
-          <Schedule data={fromshohor} special={false} title="From Shohor" />
+          <Schedule
+            data={studentFromShohor}
+            special={false}
+            title="From Shohor"
+          />
 
           {/* special trip  */}
           <div className="mt-10">
@@ -103,11 +115,7 @@ export default function HomeContainer() {
           {/* special campus  */}
           <Schedule data={sfromcampus} special={true} title="From Campus" />
           {/* special shohor  */}
-          <Schedule>
-            {studentFromShohor?.map((buses) => (
-              <TableBody></TableBody>
-            ))}
-          </Schedule>
+          <Schedule></Schedule>
 
           <Schedule data={sfromshohor} special={true} title="From Shohor" />
         </div>
