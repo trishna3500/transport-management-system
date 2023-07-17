@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { getAuth, updateProfile } from "firebase/auth";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const SignUp = () => {
   const [role, setRole] = useState("student");
@@ -44,9 +45,10 @@ const SignUp = () => {
         updateProfile(auth.currentUser, {
           displayName: fullName,
         }).catch((error) => console.log(error));
-        navigate("/");
       })
       .catch((error) => console.log(error));
+    navigate("/");
+    toast.success("Signed up successfully");
   };
   return (
     <div>

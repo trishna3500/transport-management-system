@@ -18,7 +18,16 @@ export default function RequisitionContainer() {
 
   function onSubmitHandle(e) {
     e.preventDefault();
-    postRequisition(sid, name, dept, faculty, ls, date, reason);
+    const requisitionData = {
+      name: name,
+      id: sid,
+      dept: dept,
+      faculty: faculty,
+      ls: ls,
+      date: date,
+      reason: reason,
+    };
+    console.log(requisitionData);
   }
   return (
     <div className="container m-10">
@@ -33,7 +42,7 @@ export default function RequisitionContainer() {
           <div>
             <input
               type="text"
-              name=""
+              name="name"
               id=""
               className="w-full border"
               placeholder="Enter Name"
@@ -44,7 +53,7 @@ export default function RequisitionContainer() {
           <div>
             <input
               type="text"
-              name=""
+              name="studentId"
               id=""
               className="w-full border"
               placeholder="Enter Student ID"
@@ -55,7 +64,7 @@ export default function RequisitionContainer() {
           <div>
             <input
               type="text"
-              name=""
+              name="faculty"
               id=""
               className="w-full border"
               placeholder="Enter Faculty"
@@ -66,7 +75,7 @@ export default function RequisitionContainer() {
           <div>
             <input
               type="text"
-              name=""
+              name="department"
               id=""
               className="w-full border"
               placeholder="Enter Department"
@@ -77,7 +86,7 @@ export default function RequisitionContainer() {
           <div>
             <input
               type="text"
-              name=""
+              name="semester"
               id=""
               className="w-full border"
               placeholder="Level Semester"
@@ -88,7 +97,7 @@ export default function RequisitionContainer() {
           <div>
             <input
               type="date"
-              name=""
+              name="date"
               id=""
               className="w-full border"
               placeholder="date"
@@ -98,7 +107,7 @@ export default function RequisitionContainer() {
           </div>
           <div>
             <textarea
-              name=""
+              name="reason"
               id=""
               rows="5"
               className="border w-full"
@@ -107,13 +116,10 @@ export default function RequisitionContainer() {
             ></textarea>
           </div>
 
-          <div>
-            <input
-              type="submit"
-              value="Submit"
-              className="bg-lime-500 rounded-md px-5 py-2 text-white"
-            />
-          </div>
+          <button className="bg-blue-400 px-3 py-1 w-20 rounded-lg">
+            {" "}
+            Submit
+          </button>
         </form>
       </div>
     </div>
