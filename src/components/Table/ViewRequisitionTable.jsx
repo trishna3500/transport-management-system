@@ -4,6 +4,9 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useData } from "../../context/DatabaseContext";
+import { useContext } from "react";
+import useAdmin from "../../hooks/useAdmin";
+import { AuthContext } from "../../context/AuthContext";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -11,7 +14,9 @@ function classNames(...classes) {
 
 export default function ViewRequisitionTable({ data }) {
   let { deleteRequisition, editRequisition } = useData();
-
+  const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
+  console.log(user, isAdmin);
   function handleEdit(item) {
     let update = {
       ...item,

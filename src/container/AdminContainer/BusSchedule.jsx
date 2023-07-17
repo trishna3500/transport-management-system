@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useData } from "../../context/DatabaseContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function AddBusSchedule() {
   let [trip, setTrip] = useState();

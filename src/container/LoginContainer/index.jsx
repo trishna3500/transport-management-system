@@ -2,6 +2,7 @@ import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth, AuthContext } from "../../context/AuthContext";
+import { toast } from "react-hot-toast";
 
 export default function LoginContainer() {
   const navigates = useNavigate();
@@ -22,10 +23,11 @@ export default function LoginContainer() {
     try {
       await userSignIn(email, password);
 
-      navigates("/admin");
+      navigates("/");
       setShow(true);
       setError("Loading");
       setErrorType("success");
+      toast.success("Signed in successfully");
     } catch (error) {
       // console.log(error.message);
       setError("Failed to Login!");

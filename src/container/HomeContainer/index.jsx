@@ -1,14 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Schedule, { TableBody } from "../../components/Table";
 import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DatabaseContext";
 import { useContext, useEffect, useState } from "react";
+import useAdmin from "../../hooks/useAdmin";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function HomeContainer() {
+  const { user, logout } = useContext(AuthContext);
+  console.log(user);
+  const [isAdmin] = useAdmin(user?.email);
   const [busSchedule, setBusSchedule] = useState();
   useEffect(() => {
     fetch("http://localhost:5000/api/v1/all-bus")
@@ -20,7 +24,7 @@ export default function HomeContainer() {
   );
   console.log(studentFromShohor);
   let { alldata } = useData();
-  const { user, logout } = useContext(AuthContext);
+
   let navigate = useNavigate();
 
   let fromcampus = alldata.filter(function checkAdult(type) {
@@ -66,8 +70,17 @@ export default function HomeContainer() {
                   navigate(user ? "/view-requisition" : "/requisition")
                 }
               >
-                {user ? "  View Bus Requisition" : "Bus Requisition"}
+                {isAdmin && "  View Bus Requisition"}
+                {user?.email && "Bus Requisition"}
               </button>
+              {user?.email && (
+                <Link to="/requisition">
+                  <button className="bg-sky-400 px-8 py-2">
+                    Make Requisition
+                  </button>
+                </Link>
+              )}
+
               <button
                 className={classNames(
                   "text-black bg-lime-700 rounded-md px-4 py-2"

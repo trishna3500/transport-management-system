@@ -1,7 +1,10 @@
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../../context/DatabaseContext";
+import { toast } from "react-hot-toast";
+import useAdmin from "../../hooks/useAdmin";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function RequisitionContainer() {
   let navigate = useNavigate();
@@ -27,7 +30,22 @@ export default function RequisitionContainer() {
       date: date,
       reason: reason,
     };
-    console.log(requisitionData);
+    fetch(`http://localhost:5000/api/v1/add-requisition`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(requisitionData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success === true) {
+          navigate("/");
+          toast.success("Posted your Requisition");
+        } else if (data.success === false) {
+          toast.error("Please Enter your data correctly");
+        }
+      });
   }
   return (
     <div className="container m-10">
