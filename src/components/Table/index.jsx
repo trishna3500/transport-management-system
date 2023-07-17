@@ -62,7 +62,7 @@ export default function Schedule({ data, special, title }) {
               </th>
             </tr>
           </thead>
-          <TableBody busData={busData}>{busData}</TableBody>
+          <TableBody busData={busData}></TableBody>
         </table>
       </div>
     </div>
