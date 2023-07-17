@@ -29,6 +29,7 @@ export default function RequisitionContainer() {
       ls: ls,
       date: date,
       reason: reason,
+      isVerified: "false",
     };
     fetch(`http://localhost:5000/api/v1/add-requisition`, {
       method: "POST",

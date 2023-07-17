@@ -7,6 +7,7 @@ import { useData } from "../../context/DatabaseContext";
 import { useContext, useEffect, useState } from "react";
 import useAdmin from "../../hooks/useAdmin";
 import { AuthContext } from "../../context/AuthContext";
+import { toast } from "react-hot-toast";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -19,6 +20,7 @@ export default function ViewRequisitionTable({ data }) {
       .then((res) => res.json())
       .then((data) => setRequisitions(data.data));
   }, []);
+
   let { deleteRequisition, editRequisition } = useData();
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
@@ -30,7 +32,33 @@ export default function ViewRequisitionTable({ data }) {
     };
     editRequisition(item.id, update);
   }
-
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/api/v1/delete-requisition/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Requisition successfully deleted");
+      });
+  };
+  const newInfo = {
+    isVerified: "true",
+  };
+  const handleEditStatus = (id) => {
+    fetch(`http://localhost:5000/api/v1/requisitions/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Updated User Status");
+      });
+  };
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
       <h1>View Requisition</h1>
@@ -68,7 +96,7 @@ export default function ViewRequisitionTable({ data }) {
             </tr>
           </thead>
           <tbody>
-            {requisitions.map((item, idx) => {
+            {requisitions?.map((item, idx) => {
               return (
                 <tr key={idx}>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -108,9 +136,9 @@ export default function ViewRequisitionTable({ data }) {
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <button
-                      onClick={() => handleEdit(item)}
+                      onClick={() => handleEditStatus(item._id)}
                       className={classNames(
-                        item.status === "false"
+                        item.isVerified === "false"
                           ? "text-yellow-700"
                           : "text-lime-600",
                         "whitespace-no-wrap"
@@ -125,7 +153,7 @@ export default function ViewRequisitionTable({ data }) {
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <button
-                      onClick={() => deleteRequisition(item.id)}
+                      onClick={() => handleDelete(item._id)}
                       className="text-red-600 whitespace-no-wrap"
                     >
                       <TrashIcon className="w-6" />
