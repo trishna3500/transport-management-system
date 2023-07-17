@@ -4,7 +4,7 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useData } from "../../context/DatabaseContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import useAdmin from "../../hooks/useAdmin";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -13,6 +13,12 @@ function classNames(...classes) {
 }
 
 export default function ViewRequisitionTable({ data }) {
+  const [requisitions, setRequisitions] = useState();
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v1/requisitions`)
+      .then((res) => res.json())
+      .then((data) => setRequisitions(data.data));
+  }, []);
   let { deleteRequisition, editRequisition } = useData();
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
@@ -62,7 +68,7 @@ export default function ViewRequisitionTable({ data }) {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, idx) => {
+            {requisitions.map((item, idx) => {
               return (
                 <tr key={idx}>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
