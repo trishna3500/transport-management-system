@@ -13,14 +13,15 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
 
   function onSubmitHandle(e) {
     e.preventDefault();
-    let update = {
-      trip,
-      time,
-      bus,
-      day,
-      type,
-    };
-    editSchedule(data.id, update);
+    console.log(trip, time);
+    // let update = {
+    //   trip,
+    //   time,
+    //   bus,
+    //   day,
+    //   type,
+    // };
+    // editSchedule(data.id, update);
   }
   return (
     <>
@@ -66,6 +67,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                           <div>
                             <select
                               className="w-full border"
+                              name="tripName"
                               value={trip}
                               onChange={(e) => {
                                 setTrip(e.target.value);
@@ -83,7 +85,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                           <div>
                             <input
                               type="text"
-                              name=""
+                              name="schedule"
                               id=""
                               className="w-full border"
                               placeholder="Schedule"
@@ -94,7 +96,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                           <div>
                             <input
                               type="text"
-                              name=""
+                              name="busNumber"
                               id=""
                               className="w-full border"
                               placeholder="Bus Number"
@@ -106,6 +108,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                             <select
                               value={day}
                               className="w-full border"
+                              name="day"
                               onChange={(e) => setDay(e.target.value)}
                             >
                               <option>Choose day</option>
@@ -120,7 +123,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                             <input
                               onChange={(e) => setType(e.target.value)}
                               type="radio"
-                              name="scheduletype"
+                              name="schedulType"
                               id="fromcampus"
                               value="fromcampus"
                               checked={type === "fromcampus"}
@@ -130,7 +133,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                             <input
                               onChange={(e) => setType(e.target.value)}
                               type="radio"
-                              name="scheduletype"
+                              name="scheduleType"
                               id="fromshohor"
                               value="fromshohor"
                               checked={type === "fromshohor"}
@@ -138,18 +141,18 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                             <label for="fromshohor">From Sohor</label>
                           </div>
                           <div className="flex space-x-3">
-                            <input
+                            {/* <input
                               type="submit"
                               value="Edit"
-                              onClick={closeModal}
+                              // onClick={closeModal}
                               className="bg-lime-500 rounded-md px-5 py-2 text-white"
-                            />
+                            /> */}
                             <button
                               type="button"
                               className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                              onClick={closeModal}
+                              // onClick={closeModal}
                             >
-                              Cancel
+                              Add Scheduleeee
                             </button>
                           </div>
                         </form>
