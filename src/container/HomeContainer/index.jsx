@@ -23,6 +23,7 @@ export default function HomeContainer() {
   const studentFromShohor = busSchedule?.data?.filter(
     (bus) => bus.busType === "student"
   );
+
   const teacherFromShohor = busSchedule?.data?.filter(
     (bus) => bus.busType === "student"
   );
@@ -57,15 +58,16 @@ export default function HomeContainer() {
               Transport Management System
             </h2>
             <div className="flex justify-end space-x-5">
-              <button
-                className={classNames(
-                  user ? " bg-lime-300 " : " bg-yellow-300",
-                  "text-black rounded-md px-4 py-2"
-                )}
-                onClick={() => navigate(user ? "/add-schedule" : "/signin")}
-              >
-                {user ? "Add Schedule" : "Login"}
-              </button>
+              {isAdmin && (
+                <Link to="/add-schedule">
+                  <button
+                    className="bg-green-400"
+                    // onClick={() => navigate(user ? "/add-schedule" : "/signin")}
+                  >
+                    {user ? "Add Schedule" : "Login"}
+                  </button>
+                </Link>
+              )}
 
               {isAdmin && (
                 <button
