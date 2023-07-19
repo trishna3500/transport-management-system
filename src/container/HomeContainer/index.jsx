@@ -114,10 +114,10 @@ export default function HomeContainer() {
               {isAdmin && (
                 <Link to="/add-schedule">
                   <button
-                    className="bg-green-400"
+                    className="bg-green-400 px-3 py-2"
                     // onClick={() => navigate(user ? "/add-schedule" : "/signin")}
                   >
-                    {user ? "Add Schedule" : "Login"}
+                    Add Schedule
                   </button>
                 </Link>
               )}
@@ -154,6 +154,10 @@ export default function HomeContainer() {
               </button>
             </div>
           </div>
+          <h1 className="text-3xl font-medium text-center">
+            Week Days Schedule
+          </h1>
+          <h1 className="text-3xl font-medium text-center">From Campus</h1>
           {/* Teacher from Shohor  */}
           <Schedule
             data={teacherFromShohor}

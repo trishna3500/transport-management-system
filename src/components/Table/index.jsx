@@ -45,6 +45,9 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
                 Departure time
               </th>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Stopage
+              </th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Bus No.
               </th>
               {isAdmin ? (
@@ -81,6 +84,15 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <p className="text-gray-900 whitespace-no-wrap">
                     {item.schedule}
+                  </p>
+                </td>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <p className="text-gray-600 whitespace-no-wrap">
+                    {item.stopage.map((stopage) => (
+                      <h1 className="bg-fuchsia-100 rounded-3xl mt-1 w-32">
+                        {stopage}
+                      </h1>
+                    ))}
                   </p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

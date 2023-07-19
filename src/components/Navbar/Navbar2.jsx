@@ -32,7 +32,7 @@ export default function Navbar2() {
                     )}
                     // onClick={() => navigate(user ? "/add-schedule" : "/signin")}
                   >
-                    {/* {user ? "Add Schedule" : "Login"} */}
+                    Add Schedule
                   </button>
                 </Link>
               )}

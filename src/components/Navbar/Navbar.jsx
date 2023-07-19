@@ -52,6 +52,20 @@ export default function Navbar() {
                         Home
                       </button>
                     </Link>
+                    {!user && (
+                      <>
+                        <Link to="/signup">
+                          <button className="text-white font-semibold text-xl">
+                            Sign Up
+                          </button>
+                        </Link>
+                        <Link to="/signin">
+                          <button className="text-white font-semibold text-xl">
+                            Sign In
+                          </button>
+                        </Link>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
