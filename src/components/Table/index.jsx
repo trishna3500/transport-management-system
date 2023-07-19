@@ -1,6 +1,6 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useContext, useState } from "react";
-import { AuthContext, useAuth } from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DatabaseContext";
 import EditScheduleModal from "../Modal";
 import useAdmin from "../../hooks/useAdmin";
@@ -10,9 +10,9 @@ function classNames(...classes) {
 }
 
 export default function Schedule({ data, special, title, studentFromShohor }) {
-  console.log(studentFromShohor);
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
+
   let { deleteSchedule } = useData();
   let [isOpen, setIsOpen] = useState(false);
 
@@ -47,7 +47,7 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Bus No.
               </th>
-              {user ? (
+              {isAdmin ? (
                 <>
                   <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                     Edit
@@ -62,71 +62,69 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
             </tr>
           </thead>
           <tbody>
-            {data?.map((item, idx) => {
-              return (
-                <tr key={idx}>
-                  {special ? (
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-600 whitespace-no-wrap">
-                        <span className=" capitalize"> {item.day}</span>
-                      </p>
-                    </td>
-                  ) : (
-                    ""
-                  )}
+            {data?.map((item, idx) => (
+              <tr key={idx}>
+                {special ? (
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-600 whitespace-no-wrap">
-                      <span className=" capitalize"> {item.trip}</span>
+                      <span className=" capitalize"> {item.day}</span>
                     </p>
                   </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">
-                      {item.time}
+                ) : (
+                  ""
+                )}
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <p className="text-gray-600 whitespace-no-wrap">
+                    <span className=" capitalize"> {item.busType}</span>
+                  </p>
+                </td>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <p className="text-gray-900 whitespace-no-wrap">
+                    {item.schedule}
+                  </p>
+                </td>
+                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+                    />
+                    <p className="text-gray-600 whitespace-no-wrap">
+                      {item.busNumber}
                     </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                      />
-                      <p className="text-gray-600 whitespace-no-wrap">
-                        {item.bus}
-                      </p>
-                    </span>
-                  </td>
-                  {isAdmin ? (
-                    <>
-                      {" "}
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button
-                          onClick={() => openModal()}
-                          className="text-lime-600 whitespace-no-wrap"
-                        >
-                          <PencilSquareIcon className="w-6" />
-                        </button>
+                  </span>
+                </td>
+                {isAdmin ? (
+                  <>
+                    {" "}
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <button
+                        onClick={() => openModal()}
+                        className="text-lime-600 whitespace-no-wrap"
+                      >
+                        <PencilSquareIcon className="w-6" />
+                      </button>
 
-                        <EditScheduleModal
-                          isOpen={isOpen}
-                          data={item}
-                          closeModal={closeModal}
-                        />
-                      </td>
-                      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button
-                          onClick={() => deleteSchedule(item.id)}
-                          className="text-red-600 whitespace-no-wrap"
-                        >
-                          <TrashIcon className="w-6" />
-                        </button>
-                      </td>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                </tr>
-              );
-            })}
+                      <EditScheduleModal
+                        isOpen={isOpen}
+                        data={item}
+                        closeModal={closeModal}
+                      />
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <button
+                        onClick={() => deleteSchedule(item.id)}
+                        className="text-red-600 whitespace-no-wrap"
+                      >
+                        <TrashIcon className="w-6" />
+                      </button>
+                    </td>
+                  </>
+                ) : (
+                  ""
+                )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

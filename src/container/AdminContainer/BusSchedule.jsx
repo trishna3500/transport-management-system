@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { useData } from "../../context/DatabaseContext";
 import { AuthContext } from "../../context/AuthContext";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function AddBusSchedule() {
   let [trip, setTrip] = useState();
@@ -10,7 +12,7 @@ export default function AddBusSchedule() {
   let [type, setType] = useState("");
 
   let { postSchedule } = useData();
-
+  const navigate = useNavigate();
   function onSubmitHandle(e) {
     e.preventDefault();
     const form = e.target;
@@ -37,7 +39,11 @@ export default function AddBusSchedule() {
       body: JSON.stringify(addedSchedule),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        form.reset();
+        toast.success("Bus Schedule added successfully");
+        navigate("/");
+      });
   }
 
   return (

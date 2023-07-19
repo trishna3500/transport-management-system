@@ -51,7 +51,7 @@ export default function Navbar2() {
                 </button>
               )}
 
-              {user?.email && (
+              {user?.email && !isAdmin && (
                 <Link to="/requisition">
                   <button className="bg-sky-400 px-8 py-2">
                     Make Requisition

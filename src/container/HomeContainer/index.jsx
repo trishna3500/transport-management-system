@@ -11,7 +11,6 @@ function classNames(...classes) {
 
 export default function HomeContainer() {
   const { user, logout } = useContext(AuthContext);
-  console.log(user);
   const [isAdmin] = useAdmin(user?.email);
   const [busSchedule, setBusSchedule] = useState();
   useEffect(() => {
@@ -21,14 +20,68 @@ export default function HomeContainer() {
   }, []);
 
   const studentFromShohor = busSchedule?.data?.filter(
-    (bus) => bus.busType === "student"
+    (bus) =>
+      bus.busType === "Student" &&
+      bus.location === "fromshohor" &&
+      bus.day === "Sunday to Thursday"
   );
 
   const teacherFromShohor = busSchedule?.data?.filter(
-    (bus) => bus.busType === "student"
+    (bus) =>
+      bus.busType === "Teacher" &&
+      bus.location === "fromshohor" &&
+      bus.day === "Sunday to Thursday"
   );
-  const fridayBus = busSchedule?.data?.filter((bus) => bus.day === "Friday");
-  console.log(studentFromShohor, teacherFromShohor);
+  const studentFromCampus = busSchedule?.data?.filter(
+    (bus) =>
+      bus.busType === "Student" &&
+      bus.location === "fromcampus" &&
+      bus.day === "Sunday to Thursday"
+  );
+  const teacherFromCampus = busSchedule?.data?.filter(
+    (bus) =>
+      bus.busType === "Teacher" &&
+      bus.location === "fromcampus" &&
+      bus.day === "Sunday to Thursday"
+  );
+  const weekendBusForStudentsFromCampus = busSchedule?.data?.filter(
+    (bus) =>
+      bus.day !== "Sunday to Thursday" &&
+      bus.busType === "Student" &&
+      bus.location === "fromcampus"
+  );
+  const weekendBusForTeachersFromCampus = busSchedule?.data?.filter(
+    (bus) =>
+      bus.day !== "Sunday to Thursday" &&
+      bus.busType === "Teacher" &&
+      bus.location === "fromcampus"
+  );
+  const weekendBusForStudentsFromShohor = busSchedule?.data?.filter(
+    (bus) =>
+      bus.day !== "Sunday to Thursday" &&
+      bus.busType === "Student" &&
+      bus.location === "fromshohor"
+  );
+  const weekendBusForTeachersFromShohor = busSchedule?.data?.filter(
+    (bus) =>
+      bus.day !== "Sunday to Thursday" &&
+      bus.busType === "Teacher" &&
+      bus.location === "fromshohor"
+  );
+  console.log(
+    "studentfromShohor:",
+    studentFromShohor,
+    "teacherFromShohor",
+    teacherFromShohor,
+    "weekendBusForStudentsFromCampus",
+    weekendBusForStudentsFromCampus,
+    "weekendBusForTeachersFromCampus",
+    weekendBusForTeachersFromCampus,
+    "weekendBusForStudentsFromShohor",
+    weekendBusForStudentsFromShohor,
+    "weekendBusForTeachersFromShohor",
+    weekendBusForTeachersFromShohor
+  );
   let { alldata } = useData();
 
   let navigate = useNavigate();
@@ -83,7 +136,7 @@ export default function HomeContainer() {
                 </button>
               )}
 
-              {user?.email && (
+              {user?.email && !isAdmin && (
                 <Link to="/requisition">
                   <button className="bg-sky-400 px-8 py-2">
                     Make Requisition
@@ -101,25 +154,52 @@ export default function HomeContainer() {
               </button>
             </div>
           </div>
-          {/* from campus  */}
-          <Schedule data={fromcampus} special={false} title="From Campus" />
-          {/* from sohor  */}
+          {/* Teacher from Shohor  */}
           <Schedule
-            studentFromShohor={studentFromShohor}
+            data={teacherFromShohor}
             special={false}
-            title="From Shohor"
+            title="Teacher From Shohor"
+          />
+          {/* Student from Shohor  */}
+          <Schedule
+            data={studentFromShohor}
+            special={false}
+            title="Student From Shohor"
+          />
+          {/* Teacher from campus  */}
+          <Schedule
+            data={teacherFromCampus}
+            special={false}
+            title="Teacher From Campus"
+          />
+          {/* Student from campus */}
+          <Schedule
+            data={studentFromCampus}
+            special={false}
+            title="Student From Campus"
           />
 
           {/* special trip  */}
           <div className="mt-10">
-            <h1 className="text-xl font-bold">Speciallll Trip</h1>
+            <h1 className="text-xl font-bold text-center ">Special Trip</h1>
           </div>
-          {/* special campus  */}
-          <Schedule data={sfromcampus} special={true} title="From Campus" />
-          {/* special shohor  */}
-          <Schedule></Schedule>
-
-          <Schedule data={sfromshohor} special={true} title="From Shohor" />
+          {/* Student special Bus From Campus  */}
+          <Schedule
+            data={weekendBusForStudentsFromCampus}
+            title="Student Bus From Campus"
+          />
+          <Schedule
+            data={weekendBusForTeachersFromCampus}
+            title="Teacher Bus From Campus"
+          />
+          <Schedule
+            data={weekendBusForStudentsFromShohor}
+            title="Student Bus From Shohor"
+          />
+          <Schedule
+            data={weekendBusForTeachersFromShohor}
+            title="Teacher Bus From Shohor"
+          />
         </div>
       </div>
     </>

@@ -3,8 +3,12 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth, AuthContext } from "../../context/AuthContext";
 import { toast } from "react-hot-toast";
+import useAdmin from "../../hooks/useAdmin";
 
 export default function LoginContainer() {
+  const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
+  console.log(isAdmin);
   const navigates = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
