@@ -103,7 +103,7 @@ export default function HomeContainer() {
           <Schedule data={fromcampus} special={false} title="From Campus" />
           {/* from sohor  */}
           <Schedule
-            data={studentFromShohor}
+            studentFromShohor={studentFromShohor}
             special={false}
             title="From Shohor"
           />

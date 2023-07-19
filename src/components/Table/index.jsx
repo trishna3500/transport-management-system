@@ -3,13 +3,16 @@ import { useContext, useState } from "react";
 import { AuthContext, useAuth } from "../../context/AuthContext";
 import { useData } from "../../context/DatabaseContext";
 import EditScheduleModal from "../Modal";
+import useAdmin from "../../hooks/useAdmin";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Schedule({ data, special, title }) {
+export default function Schedule({ data, special, title, studentFromShohor }) {
+  console.log(studentFromShohor);
   const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
   let { deleteSchedule } = useData();
   let [isOpen, setIsOpen] = useState(false);
 
@@ -92,7 +95,7 @@ export default function Schedule({ data, special, title }) {
                       </p>
                     </span>
                   </td>
-                  {user ? (
+                  {isAdmin ? (
                     <>
                       {" "}
                       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
