@@ -11,6 +11,8 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import AddBusSchedule from "../container/AdminContainer/BusSchedule";
 import TeacherSignUp from "../components/UI/TeacherSignUp";
+import BusInfoLayout from "../Layout/BusInfoLayout";
+import BusInfoPage from "../Layout/BusInfoPage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -47,6 +49,16 @@ export const router = createBrowserRouter([
       {
         path: "/driver",
         element: <DriverInfoPage></DriverInfoPage>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <BusInfoLayout></BusInfoLayout>,
+    children: [
+      {
+        path: "/dashboard",
+        element: <BusInfoPage></BusInfoPage>,
       },
     ],
   },

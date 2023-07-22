@@ -161,7 +161,7 @@ export default function HomeContainer() {
                 className={classNames(
                   "text-black bg-lime-700 rounded-md px-4 py-2"
                 )}
-                onClick={() => navigate("/driver")}
+                onClick={() => navigate("/dashboard")}
               >
                 Driver Info
               </button>
