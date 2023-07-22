@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DatabaseContext";
 import EditScheduleModal from "../Modal";
 import useAdmin from "../../hooks/useAdmin";
+import { toast } from "react-hot-toast";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -16,6 +17,16 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
   let { deleteSchedule } = useData();
   let [isOpen, setIsOpen] = useState(false);
 
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/api/v1/all-bus/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.data);
+        toast.success("Deleted Schedule");
+      });
+  };
   function closeModal() {
     setIsOpen(false);
   }
@@ -125,7 +136,7 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                       <button
-                        onClick={() => deleteSchedule(item.id)}
+                        onClick={() => handleDelete(item._id)}
                         className="text-red-600 whitespace-no-wrap"
                       >
                         <TrashIcon className="w-6" />
