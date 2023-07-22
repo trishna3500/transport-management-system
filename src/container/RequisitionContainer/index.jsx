@@ -41,6 +41,7 @@ export default function RequisitionContainer() {
       isVerified: "false",
       employeeId: EmployeeId,
       role: role,
+      email: user?.email,
     };
     console.log(requisitionData);
     fetch(`http://localhost:5000/api/v1/add-requisition`, {

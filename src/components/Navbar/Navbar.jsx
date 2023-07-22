@@ -1,6 +1,6 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 
@@ -14,7 +14,15 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const [userHasRequisition, setUserHasRequisition] = useState([]);
+  const userRequisitions = userHasRequisition.length;
   const { user, logout } = useContext(AuthContext);
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v1/user-requisition/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setUserHasRequisition(data?.data));
+  }, [user?.email]);
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -70,13 +78,24 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
+                <div
+                  className=" tooltip tooltip-bottom"
+                  data-tip={
+                    userHasRequisition
+                      ? `you have ${userRequisitions} requisition approved `
+                      : `0 requisitions approved`
+                  }
+                >
+                  <button className="btn">
+                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                </div>
+                {/* <button
                   type="button"
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                </button> */}
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
