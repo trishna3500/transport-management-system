@@ -10,7 +10,7 @@ import SignUp from "../components/UI/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import AddBusSchedule from "../container/AdminContainer/BusSchedule";
-
+import TeacherSignUp from "../components/UI/TeacherSignUp";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -30,13 +30,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/teacher-signup",
-        element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <SignUp></SignUp>
-            </AdminRoute>
-          </PrivateRoute>
-        ),
+        element: <TeacherSignUp></TeacherSignUp>,
       },
       {
         path: "/view-requisition",

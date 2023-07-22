@@ -14,7 +14,7 @@ const AdminRoute = ({ children }) => {
   if (user && isAdmin) {
     return children;
   }
-  return <Navigate to="/signin" />;
+  return <Navigate to="/signup" />;
 };
 
 export default AdminRoute;

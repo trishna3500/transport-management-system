@@ -121,6 +121,16 @@ export default function HomeContainer() {
                   </button>
                 </Link>
               )}
+              {isAdmin && (
+                <Link to="/teacher-signup">
+                  <button
+                    className="bg-green-400 px-3 py-2"
+                    // onClick={() => navigate(user ? "/add-schedule" : "/signin")}
+                  >
+                    Add Teacher
+                  </button>
+                </Link>
+              )}
 
               {isAdmin && (
                 <button

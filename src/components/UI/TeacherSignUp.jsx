@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 import useAdmin from "../../hooks/useAdmin";
 
 const SignUp = () => {
-  const [role, setRole] = useState("student");
   const { userSignUp } = useContext(AuthContext);
   const auth = getAuth();
   const { user } = useContext(AuthContext);
@@ -17,21 +16,13 @@ const SignUp = () => {
     event.preventDefault();
     const form = event.target;
     const fullName = form.fullName.value;
-    const studentID = form?.studentID?.value;
+
     const email = form.email.value;
     const password = form.password.value;
     const phoneNumber = form.phoneNumber.value;
     const employeeID = form.employeeID.value;
-    console.log(fullName, studentID, email, password, phoneNumber);
+    console.log(fullName, email, password, phoneNumber);
 
-    const userInfo = {
-      name: fullName,
-      email: email,
-      role: role,
-      studentID: studentID,
-      phoneNumber: phoneNumber,
-      password: password,
-    };
     const teacherInfo = {
       name: fullName,
       email: email,
@@ -41,29 +32,29 @@ const SignUp = () => {
       password: password,
     };
 
-    console.log(userInfo, teacherInfo);
+    console.log(teacherInfo);
 
-    // fetch(`http://localhost:5000/api/v1/user`, {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(isAdmin ? teacherInfo : userInfo),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data));
+    fetch(`http://localhost:5000/api/v1/user`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(teacherInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
 
-    // userSignUp(email, password)
-    //   .then((result) => {
-    //     const user = result.user;
-    //     console.log(user);
-    //     updateProfile(auth.currentUser, {
-    //       displayName: fullName,
-    //     }).catch((error) => console.log(error));
-    //   })
-    //   .catch((error) => console.log(error));
-    // navigate("/");
-    // toast.success("Signed up successfully");
+    userSignUp(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        updateProfile(auth.currentUser, {
+          displayName: fullName,
+        }).catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
+    navigate("/");
+    toast.success("Signed up successfully");
   };
   return (
     <div>
@@ -85,31 +76,6 @@ const SignUp = () => {
                 action="#"
                 class="mt-8 grid grid-cols-6 gap-6"
               >
-                {!isAdmin && (
-                  <div class="col-span-6 sm:col-span-3">
-                    <fieldset class="grid grid-cols-2 gap-4 mb-4">
-                      <legend class="sr-only">Delivery</legend>
-                      <div>
-                        <input
-                          type="radio"
-                          name="DeliveryOption"
-                          value="student"
-                          id="DeliveryStandard"
-                          class="peer hidden"
-                          onClick={(e) => setRole(e.target.value)}
-                        />
-
-                        <label
-                          for="DeliveryStandard"
-                          class="block cursor-pointer rounded-lg border border-gray-100 p-4 text-sm font-medium shadow-sm hover:border-gray-200 peer-checked:border-blue-500 peer-checked:ring-1 peer-checked:ring-blue-500"
-                        >
-                          <p class="text-gray-700">Student</p>
-                        </label>
-                      </div>
-                    </fieldset>
-                  </div>
-                )}
-
                 <div class="col-span-6">
                   <label
                     for="FirstName"
@@ -143,29 +109,17 @@ const SignUp = () => {
                     for="FirstName"
                     class="block text-sm font-medium text-gray-700"
                   >
-                    {isAdmin ? "Employee Id" : "Student Id"}
+                    Employee Id
                     <span className="text-red-600 text-lg">*</span>
                   </label>
 
-                  {isAdmin ? (
-                    <input
-                      type="number"
-                      id="employeeID"
-                      name="employeeID"
-                      required
-                      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                    />
-                  ) : (
-                    <>
-                      <input
-                        type="number"
-                        id="studentID"
-                        name="studentID"
-                        required
-                        class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                      />
-                    </>
-                  )}
+                  <input
+                    type="number"
+                    id="employeeID"
+                    name="employeeID"
+                    required
+                    class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  />
 
                   <label
                     for="Email"
