@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DatabaseContext";
 import { useContext, useEffect, useState } from "react";
 import useAdmin from "../../hooks/useAdmin";
+import useTeacher from "../../hooks/useTeacher";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -12,6 +13,8 @@ function classNames(...classes) {
 export default function HomeContainer() {
   const { user, logout } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
+  const [isTeacher] = useTeacher(user?.email);
+  console.log(isTeacher);
   const [busSchedule, setBusSchedule] = useState();
   useEffect(() => {
     fetch("http://localhost:5000/api/v1/all-bus")

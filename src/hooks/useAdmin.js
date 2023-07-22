@@ -13,6 +13,8 @@ const useAdmin = (email) => {
           if (data.data[0].role === "admin") {
             setIsAdmin(true);
             setIsAdminLoading(false);
+          } else {
+            setIsAdmin(false);
           }
         });
     }
