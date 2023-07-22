@@ -8,20 +8,18 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
   let [bus, setBus] = useState(data.bus);
   let [day, setDay] = useState(data.day);
   let [type, setType] = useState(data.type);
-
+  console.log(data);
   let { editSchedule } = useData();
 
-  function onSubmitHandle(e) {
+  function handleEditSubmit(e) {
     e.preventDefault();
-    console.log(trip, time);
-    // let update = {
-    //   trip,
-    //   time,
-    //   bus,
-    //   day,
-    //   type,
-    // };
-    // editSchedule(data.id, update);
+    const form = e.target;
+    const busType = form.busType?.value;
+    const schedule = form.schedule?.value;
+    const busNumber = form.busNumber?.value;
+    const day = form.day?.value;
+    const location = form.location?.value;
+    console.log(busType, schedule, busNumber, day, location);
   }
   return (
     <>
@@ -62,17 +60,10 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                       <div className="flex justify-center">
                         <form
                           className="flex flex-col w-1/2 space-y-3"
-                          onSubmit={(e) => onSubmitHandle(e)}
+                          onSubmit={handleEditSubmit}
                         >
                           <div>
-                            <select
-                              className="w-full border"
-                              name="tripName"
-                              value={trip}
-                              onChange={(e) => {
-                                setTrip(e.target.value);
-                              }}
-                            >
+                            <select className="w-full border" name="busType">
                               <option>Choose trip name</option>
                               <option value="Student">Student</option>
                               <option value="Teacher">Teacher</option>
@@ -89,8 +80,6 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                               id=""
                               className="w-full border"
                               placeholder="Schedule"
-                              value={time}
-                              onChange={(e) => setTime(e.target.value)}
                             />
                           </div>
                           <div>
@@ -99,18 +88,11 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                               name="busNumber"
                               id=""
                               className="w-full border"
-                              placeholder="Bus Number"
-                              value={bus}
-                              onChange={(e) => setBus(e.target.value)}
+                              placeholder={data.busNumber}
                             />
                           </div>
                           <div className="">
-                            <select
-                              value={day}
-                              className="w-full border"
-                              name="day"
-                              onChange={(e) => setDay(e.target.value)}
-                            >
+                            <select className="w-full border" name="day">
                               <option>Choose day</option>
                               <option value="Sunday to Thursday">
                                 Sunday to Thursday
@@ -121,22 +103,18 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                           </div>
                           <div>
                             <input
-                              onChange={(e) => setType(e.target.value)}
                               type="radio"
-                              name="schedulType"
+                              name="location"
                               id="fromcampus"
                               value="fromcampus"
-                              checked={type === "fromcampus"}
                             />
                             <label for="fromcampus">From Campus</label>
                             <br />
                             <input
-                              onChange={(e) => setType(e.target.value)}
                               type="radio"
-                              name="scheduleType"
+                              name="location"
                               id="fromshohor"
                               value="fromshohor"
-                              checked={type === "fromshohor"}
                             />
                             <label for="fromshohor">From Sohor</label>
                           </div>
@@ -147,12 +125,8 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                               // onClick={closeModal}
                               className="bg-lime-500 rounded-md px-5 py-2 text-white"
                             /> */}
-                            <button
-                              type="button"
-                              className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                              // onClick={closeModal}
-                            >
-                              Add Scheduleeee
+                            <button className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-orange-500 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                              Add Schedule
                             </button>
                           </div>
                         </form>
