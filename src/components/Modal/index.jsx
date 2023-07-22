@@ -1,6 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { useData } from "../../context/DatabaseContext";
+import { toast } from "react-hot-toast";
 
 export default function EditScheduleModal({ isOpen, closeModal, data }) {
   let [trip, setTrip] = useState(data.trip);
@@ -20,6 +21,25 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
     const day = form.day?.value;
     const location = form.location?.value;
     console.log(busType, schedule, busNumber, day, location);
+    const updatedInfo = {
+      busType: busType,
+      schedule: schedule,
+      busNumber: busNumber,
+      day: day,
+      location: location,
+    };
+    fetch(`http://localhost:5000/api/v1/edit-schedule/${data._id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Updated Bus Schedule");
+      });
   }
   return (
     <>
