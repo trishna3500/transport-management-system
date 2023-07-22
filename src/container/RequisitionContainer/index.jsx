@@ -5,10 +5,13 @@ import { useData } from "../../context/DatabaseContext";
 import { toast } from "react-hot-toast";
 import useAdmin from "../../hooks/useAdmin";
 import { AuthContext } from "../../context/AuthContext";
+import useTeacher from "../../hooks/useTeacher";
 
 export default function RequisitionContainer() {
+  const { user } = useContext(AuthContext);
   let navigate = useNavigate();
-
+  const [isTeacher] = useTeacher(user?.email);
+  console.log(isTeacher);
   let [sid, setSid] = useState("");
   let [name, setName] = useState("");
   let [dept, setDept] = useState("");
@@ -16,10 +19,16 @@ export default function RequisitionContainer() {
   let [ls, setLS] = useState("");
   let [date, setDate] = useState("");
   let [reason, setReason] = useState("");
-
+  let [EmployeeId, setEmployeeId] = useState("");
   let { postRequisition } = useData();
+  let [role, setRole] = useState();
 
   function onSubmitHandle(e) {
+    if (isTeacher) {
+      setRole("Teacher");
+    } else {
+      setRole("Student");
+    }
     e.preventDefault();
     const requisitionData = {
       name: name,
@@ -30,7 +39,10 @@ export default function RequisitionContainer() {
       date: date,
       reason: reason,
       isVerified: "false",
+      employeeId: EmployeeId,
+      role: role,
     };
+    console.log(requisitionData);
     fetch(`http://localhost:5000/api/v1/add-requisition`, {
       method: "POST",
       headers: {
@@ -64,22 +76,42 @@ export default function RequisitionContainer() {
               name="name"
               id=""
               className="w-full border"
-              placeholder="Enter Name"
+              placeholder="Enter Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div>
-            <input
-              type="text"
-              name="studentId"
-              id=""
-              className="w-full border"
-              placeholder="Enter Student ID"
-              value={sid}
-              onChange={(e) => setSid(e.target.value)}
-            />
-          </div>
+          {!isTeacher ? (
+            <>
+              {" "}
+              <div>
+                <input
+                  type="text"
+                  name="studentId"
+                  id=""
+                  className="w-full border"
+                  placeholder="Enter Student ID"
+                  value={sid}
+                  onChange={(e) => setSid(e.target.value)}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <input
+                  type="text"
+                  name="EmployeeId"
+                  id=""
+                  className="w-full border"
+                  placeholder="Enter Employee ID"
+                  value={EmployeeId}
+                  onChange={(e) => setEmployeeId(e.target.value)}
+                />
+              </div>
+            </>
+          )}
+
           <div>
             <input
               type="text"
@@ -102,17 +134,20 @@ export default function RequisitionContainer() {
               onChange={(e) => setDept(e.target.value)}
             />
           </div>
-          <div>
-            <input
-              type="text"
-              name="semester"
-              id=""
-              className="w-full border"
-              placeholder="Level Semester"
-              value={ls}
-              onChange={(e) => setLS(e.target.value)}
-            />
-          </div>
+          {!isTeacher && (
+            <div>
+              <input
+                type="text"
+                name="semester"
+                id=""
+                className="w-full border"
+                placeholder="Level Semester"
+                value={ls}
+                onChange={(e) => setLS(e.target.value)}
+              />
+            </div>
+          )}
+
           <div>
             <input
               type="date"
@@ -129,6 +164,7 @@ export default function RequisitionContainer() {
               name="reason"
               id=""
               rows="5"
+              placeholder="Your Reason in short"
               className="border w-full"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
