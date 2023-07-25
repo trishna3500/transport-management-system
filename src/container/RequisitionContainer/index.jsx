@@ -62,11 +62,11 @@ export default function RequisitionContainer() {
       });
   }
   return (
-    <div className="container m-10">
+    <div className="  m-10">
       <button onClick={() => navigate("/")} className="flex space-x-1 mt-5">
         <ArrowLeftIcon className="w-6" /> <span>Back</span>
       </button>
-      <div>
+      <div className="flex justify-center w-11/12">
         <form
           className="flex flex-col w-1/2 space-y-3 mt-10"
           onSubmit={(e) => onSubmitHandle(e)}
@@ -172,7 +172,7 @@ export default function RequisitionContainer() {
             ></textarea>
           </div>
 
-          <button className="bg-blue-400 px-3 py-1 w-20 rounded-lg">
+          <button className="bg-green-400 hover:bg-green-500 rounded-lg hover:rounded-xl px-5 py-2 w-24">
             {" "}
             Submit
           </button>

@@ -37,7 +37,9 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
 
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-      <h1>{title}</h1>
+      <h1 className=" font-extrabold text-transparent text-xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+        {title}
+      </h1>
       <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
         <table className="min-w-full leading-normal">
           <thead>
@@ -49,15 +51,13 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
               ) : (
                 ""
               )}
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <th className="px-5 w-2/3 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Trip Name
               </th>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Departure time
               </th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                Stopage
-              </th>
+
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Bus No.
               </th>
@@ -88,24 +88,21 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
                   ""
                 )}
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p className="text-gray-600 whitespace-no-wrap">
-                    <span className=" capitalize"> {item.busType}</span>
-                  </p>
+                  <span className="font-semibold ">{item.busType}</span>
+                  <div className="grid grid-cols-4 gap-3 text-center">
+                    {item.stopage.map((stopage) => (
+                      <h1 className="bg-slate-200 rounded-full mt-1 ">
+                        {stopage}
+                      </h1>
+                    ))}
+                  </div>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <p className="text-gray-900 whitespace-no-wrap">
                     {item.schedule}
                   </p>
                 </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p className="text-gray-600 whitespace-no-wrap">
-                    {item.stopage.map((stopage) => (
-                      <h1 className="bg-fuchsia-100 rounded-3xl mt-1 w-32">
-                        {stopage}
-                      </h1>
-                    ))}
-                  </p>
-                </td>
+
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                     <span

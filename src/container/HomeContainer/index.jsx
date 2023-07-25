@@ -1,14 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import Schedule from "../../components/Table";
 import { AuthContext } from "../../context/AuthContext";
-
 import { useContext, useEffect, useState } from "react";
 import useAdmin from "../../hooks/useAdmin";
 import useTeacher from "../../hooks/useTeacher";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function HomeContainer() {
   const { user } = useContext(AuthContext);
@@ -88,7 +83,7 @@ export default function HomeContainer() {
 
   const navigate = useNavigate();
   return (
-    <div className="bg-stone-100">
+    <div className="bg-stone-100 mt-12">
       <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
           <div className="flex justify-between mb-20">
@@ -98,42 +93,36 @@ export default function HomeContainer() {
             <div className="flex justify-end space-x-5">
               {isAdmin && (
                 <Link to="/add-schedule">
-                  <button
-                    className="bg-green-400 px-3 py-2"
-                    // onClick={() => navigate(user ? "/add-schedule" : "/signin")}
-                  >
+                  <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
+                    <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                     Add Schedule
                   </button>
                 </Link>
               )}
               {isAdmin && (
                 <Link to="/teacher-signup">
-                  <button
-                    className="bg-green-400 px-3 py-2"
-                    // onClick={() => navigate(user ? "/add-schedule" : "/signin")}
-                  >
+                  <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
+                    <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                     Add Teacher
                   </button>
                 </Link>
               )}
-
               {isAdmin && (
                 <button
-                  className={classNames(
-                    user ? " bg-red-600 " : " bg-yellow-300",
-                    "text-black rounded-md px-4 py-2"
-                  )}
+                  className="relative rounded px-5  overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
                   onClick={() =>
                     navigate(user ? "/view-requisition" : "/requisition")
                   }
                 >
+                  <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                   View Bus Requisition
                 </button>
               )}
 
               {user?.email && !isAdmin && (
                 <Link to="/requisition">
-                  <button className="bg-sky-400 px-8 py-2">
+                  <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
+                    <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                     Make Requisition
                   </button>
                 </Link>
@@ -148,55 +137,68 @@ export default function HomeContainer() {
               </button>
             </div>
           </div>
-          <h1 className="text-3xl font-medium text-center">
+          <h1 className="text-6xl font-medium text-center -mt-10 mb-5">
             Week Days Schedule
           </h1>
-          <h1 className="text-3xl font-medium text-center">From Campus</h1>
-          {/* Teacher from Shohor  */}
-          <Schedule
-            data={teacherFromShohor}
-            special={false}
-            title="Teacher From Shohor"
-          />
+          <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
+            From Town
+          </h1>
           {/* Student from Shohor  */}
           <Schedule
             data={studentFromShohor}
             special={false}
-            title="Student From Shohor"
+            title="For Students"
+          />
+
+          {/* Teacher from Shohor  */}
+          <Schedule
+            data={teacherFromShohor}
+            special={false}
+            title="For Teachers"
+          />
+          <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            From Campus
+          </h1>
+          {/* Student from campus */}
+          <Schedule
+            data={studentFromCampus}
+            special={false}
+            title="For Students"
           />
           {/* Teacher from campus  */}
           <Schedule
             data={teacherFromCampus}
             special={false}
-            title="Teacher From Campus"
-          />
-          {/* Student from campus */}
-          <Schedule
-            data={studentFromCampus}
-            special={false}
-            title="Student From Campus"
+            title="For Teachers"
           />
 
           {/* special trip  */}
-          <div className="mt-10">
-            <h1 className="text-xl font-bold text-center ">Special Trip</h1>
-          </div>
+
+          <h1 className="text-6xl font-medium text-center mb-5">
+            Weekend Special Trip
+          </h1>
+          <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
+            From Town
+          </h1>
           {/* Student special Bus From Campus  */}
           <Schedule
-            data={weekendBusForStudentsFromCampus}
-            title="Student Bus From Campus"
-          />
-          <Schedule
-            data={weekendBusForTeachersFromCampus}
-            title="Teacher Bus From Campus"
-          />
-          <Schedule
             data={weekendBusForStudentsFromShohor}
-            title="Student Bus From Shohor"
+            title="For Students"
           />
           <Schedule
             data={weekendBusForTeachersFromShohor}
-            title="Teacher Bus From Shohor"
+            title="For Teachers"
+          />
+          <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
+            From Campus
+          </h1>
+          <Schedule
+            data={weekendBusForStudentsFromCampus}
+            title="For Students"
+          />
+          <Schedule
+            data={weekendBusForTeachersFromCampus}
+            title="For Teachers"
           />
         </div>
       </div>

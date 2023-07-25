@@ -56,7 +56,7 @@ export default function ViewRequisitionTable({ data }) {
   };
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-      <h1 className="text-center text-4xl italic font-bold mb-7">
+      <h1 className="text-center text-4xl italic font-bold mb-10 mt-4">
         All Requisitions
       </h1>
       <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden mx-4">

@@ -47,6 +47,7 @@ const UserContext = ({ children }) => {
 
   //User Log Out
   const logout = () => {
+    window.location.reload();
     return signOut(auth);
   };
   const authInfo = {

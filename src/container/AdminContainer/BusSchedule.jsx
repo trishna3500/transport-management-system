@@ -37,67 +37,67 @@ export default function AddBusSchedule() {
 
   return (
     <>
-      <div className="container">
-        <div className="flex justify-center mt-20">
-          <form
-            className="flex flex-col w-1/2 space-y-3"
-            onSubmit={(e) => onSubmitHandle(e)}
-          >
-            <div>
-              <select className="w-full border" name="tripName">
-                <option value="Student">Student</option>
-                <option value="Teacher">Teacher</option>
-                <option value="Employee">Employee</option>
-                <option value="Teacher + Employee">Teacher + Employee</option>
-              </select>
-            </div>
-            <div>
-              <input
-                type="text"
-                name="schedule"
-                id=""
-                className="w-full border"
-                placeholder="Schedule"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="busNumber"
-                id=""
-                className="w-full border"
-                placeholder="Bus Number"
-              />
-            </div>
-            <div className="">
-              <select className="w-full border" name="day">
-                <option value="Sunday to Thursday">Sunday to Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-              </select>
-            </div>
-            <div>
-              <input
-                type="radio"
-                name="scheduleType"
-                id="fromcampus"
-                value="fromcampus"
-              />
-              <label for="fromcampus">From Campus</label>
-              <br />
-              <input
-                type="radio"
-                name="scheduleType"
-                id="fromshohor"
-                value="fromshohor"
-              />
-              <label for="fromshohor">From Sohor</label>
-            </div>
-            <div>
-              <button className="bg-lime-400 px-3 py-2">Add Schedule</button>
-            </div>
-          </form>
-        </div>
+      <div className="flex justify-center items-center mt-20 mx-60">
+        <form
+          className="flex flex-col w-1/2 space-y-3"
+          onSubmit={(e) => onSubmitHandle(e)}
+        >
+          <div>
+            <select className="w-full border" name="tripName">
+              <option value="Student">Student</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Employee">Employee</option>
+              <option value="Teacher + Employee">Teacher + Employee</option>
+            </select>
+          </div>
+          <div>
+            <input
+              type="text"
+              name="schedule"
+              id=""
+              className="w-full border"
+              placeholder="Schedule"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="busNumber"
+              id=""
+              className="w-full border"
+              placeholder="Bus Number"
+            />
+          </div>
+          <div className="">
+            <select className="w-full border" name="day">
+              <option value="Sunday to Thursday">Sunday to Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+            </select>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="scheduleType"
+              id="fromcampus"
+              value="fromcampus"
+            />
+            <label for="fromcampus">From Campus</label>
+            <br />
+            <input
+              type="radio"
+              name="scheduleType"
+              id="fromshohor"
+              value="fromshohor"
+            />
+            <label for="fromshohor">From Sohor</label>
+          </div>
+          <div>
+            <button className="bg-green-400 rounded-lg hover:bg-green-500 hover:rounded-2xl px-5 py-2 font-medium">
+              Add Schedule
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import useAdmin from "../../hooks/useAdmin";
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [userHasRequisition, setUserHasRequisition] = useState([]);
   const userRequisitions = userHasRequisition.length;
   const { user, logout } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
   useEffect(() => {
     fetch(`http://localhost:5000/api/v1/user-requisition/${user?.email}`)
       .then((res) => res.json())
@@ -64,7 +66,7 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {user?.email && (
+                {user?.email && !isAdmin && (
                   <div
                     className=" tooltip tooltip-bottom"
                     data-tip={

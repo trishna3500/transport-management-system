@@ -39,10 +39,7 @@ export default function Navbar2() {
 
               {isAdmin && (
                 <button
-                  className={classNames(
-                    user ? " bg-red-600 " : " bg-yellow-300",
-                    "text-black rounded-md px-4 py-2"
-                  )}
+                  className=""
                   onClick={() =>
                     navigate(user ? "/view-requisition" : "/requisition")
                   }
