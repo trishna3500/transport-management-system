@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import Schedule, { TableBody } from "../../components/Table";
+import Schedule from "../../components/Table";
 import { AuthContext } from "../../context/AuthContext";
-import { useData } from "../../context/DatabaseContext";
+
 import { useContext, useEffect, useState } from "react";
 import useAdmin from "../../hooks/useAdmin";
 import useTeacher from "../../hooks/useTeacher";
@@ -11,7 +11,7 @@ function classNames(...classes) {
 }
 
 export default function HomeContainer() {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
   const [isTeacher] = useTeacher(user?.email);
   console.log(isTeacher);
@@ -85,26 +85,8 @@ export default function HomeContainer() {
     "weekendBusForTeachersFromShohor",
     weekendBusForTeachersFromShohor
   );
-  let { alldata } = useData();
 
-  let navigate = useNavigate();
-
-  let fromcampus = alldata.filter(function checkAdult(type) {
-    return type.type === "fromcampus" && type.day === "Sunday to Thursday";
-  });
-
-  let fromshohor = alldata.filter(function checkAdult(type) {
-    return type.type === "fromshohor" && type.day === "Sunday to Thursday";
-  });
-
-  let sfromcampus = alldata.filter(function checkAdult(type) {
-    return type.type === "fromcampus" && type.day !== "Sunday to Thursday";
-  });
-
-  let sfromshohor = alldata.filter(function checkAdult(type) {
-    return type.type === "fromshohor" && type.day !== "Sunday to Thursday";
-  });
-
+  const navigate = useNavigate();
   return (
     <>
       <div className="container mx-auto px-4 sm:px-8">

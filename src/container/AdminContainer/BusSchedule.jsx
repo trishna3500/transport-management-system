@@ -1,17 +1,7 @@
-import { useContext, useState } from "react";
-import { useData } from "../../context/DatabaseContext";
-import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export default function AddBusSchedule() {
-  let [trip, setTrip] = useState();
-  let [time, setTime] = useState("");
-  let [bus, setBus] = useState("");
-  let [day, setDay] = useState("");
-  let [type, setType] = useState("");
-
-  let { postSchedule } = useData();
   const navigate = useNavigate();
   function onSubmitHandle(e) {
     e.preventDefault();
@@ -22,7 +12,6 @@ export default function AddBusSchedule() {
     const day = form.day.value;
     const scheduleType = form.scheduleType.value;
 
-    console.log(tripName, schedule, busNumber, day, scheduleType);
     const addedSchedule = {
       busType: tripName,
       schedule: schedule,
@@ -55,14 +44,7 @@ export default function AddBusSchedule() {
             onSubmit={(e) => onSubmitHandle(e)}
           >
             <div>
-              <select
-                className="w-full border"
-                name="tripName"
-                value={trip}
-                onChange={(e) => {
-                  setTrip(e.target.value);
-                }}
-              >
+              <select className="w-full border" name="tripName">
                 <option value="Student">Student</option>
                 <option value="Teacher">Teacher</option>
                 <option value="Employee">Employee</option>
@@ -76,8 +58,6 @@ export default function AddBusSchedule() {
                 id=""
                 className="w-full border"
                 placeholder="Schedule"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
               />
             </div>
             <div>
@@ -87,16 +67,10 @@ export default function AddBusSchedule() {
                 id=""
                 className="w-full border"
                 placeholder="Bus Number"
-                value={bus}
-                onChange={(e) => setBus(e.target.value)}
               />
             </div>
             <div className="">
-              <select
-                className="w-full border"
-                name="day"
-                onChange={(e) => setDay(e.target.value)}
-              >
+              <select className="w-full border" name="day">
                 <option value="Sunday to Thursday">Sunday to Thursday</option>
                 <option value="Friday">Friday</option>
                 <option value="Saturday">Saturday</option>
@@ -104,7 +78,6 @@ export default function AddBusSchedule() {
             </div>
             <div>
               <input
-                onChange={(e) => setType(e.target.value)}
                 type="radio"
                 name="scheduleType"
                 id="fromcampus"
@@ -113,7 +86,6 @@ export default function AddBusSchedule() {
               <label for="fromcampus">From Campus</label>
               <br />
               <input
-                onChange={(e) => setType(e.target.value)}
                 type="radio"
                 name="scheduleType"
                 id="fromshohor"
