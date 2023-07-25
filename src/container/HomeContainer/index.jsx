@@ -161,7 +161,7 @@ export default function HomeContainer() {
               </button>
             </div>
           </div>
-          <h1 className="text-6xl font-medium text-center -mt-10 mb-5">
+          <h1 className="text-5xl font-medium text-center -mt-10 mb-5">
             Week Days Schedule
           </h1>
           <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
@@ -210,7 +210,7 @@ export default function HomeContainer() {
 
           {/* special trip  */}
 
-          <h1 className="text-6xl font-medium text-center mb-5">
+          <h1 className="text-5xl font-medium text-center mb-5">
             Weekend Special Trip
           </h1>
           <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
