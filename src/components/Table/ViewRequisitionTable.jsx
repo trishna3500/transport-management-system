@@ -3,15 +3,11 @@ import {
   TrashIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { useData } from "../../context/DatabaseContext";
+
 import { useContext, useEffect, useState } from "react";
 import useAdmin from "../../hooks/useAdmin";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-hot-toast";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function ViewRequisitionTable({ data }) {
   const [requisitions, setRequisitions] = useState();
@@ -21,7 +17,6 @@ export default function ViewRequisitionTable({ data }) {
       .then((data) => setRequisitions(data.data));
   }, []);
 
-  let { deleteRequisition, editRequisition } = useData();
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
   console.log(user, isAdmin);
@@ -34,6 +29,7 @@ export default function ViewRequisitionTable({ data }) {
       .then((data) => {
         console.log(data);
         toast.success("Requisition successfully deleted");
+        window.location.reload();
       });
   };
   const newInfo = {
@@ -50,6 +46,7 @@ export default function ViewRequisitionTable({ data }) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        window.location.reload();
         toast.success("Updated User Status");
         setStatus(false);
       });

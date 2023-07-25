@@ -1,7 +1,7 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth, AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-hot-toast";
 import useAdmin from "../../hooks/useAdmin";
 
@@ -18,7 +18,7 @@ export default function LoginContainer() {
 
   console.log(errorType);
 
-  const { googleSignIn, userSignIn, loading } = useContext(AuthContext);
+  const { userSignIn } = useContext(AuthContext);
 
   async function onFormSubmit(e) {
     e.preventDefault();

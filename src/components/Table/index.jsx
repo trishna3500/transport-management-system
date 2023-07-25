@@ -1,20 +1,14 @@
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useData } from "../../context/DatabaseContext";
 import EditScheduleModal from "../Modal";
 import useAdmin from "../../hooks/useAdmin";
 import { toast } from "react-hot-toast";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Schedule({ data, special, title, studentFromShohor }) {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
 
-  let { deleteSchedule } = useData();
   let [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = (id) => {
@@ -25,6 +19,7 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
       .then((data) => {
         console.log(data.data);
         toast.success("Deleted Schedule");
+        window.location.reload();
       });
   };
   function closeModal() {

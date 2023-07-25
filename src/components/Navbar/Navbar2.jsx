@@ -1,6 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { useData } from "../../context/DatabaseContext";
 import { useContext } from "react";
 import useAdmin from "../../hooks/useAdmin";
 
@@ -9,9 +8,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar2() {
-  let { alldata } = useData();
-
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
   let navigate = useNavigate();
   return (

@@ -1,9 +1,7 @@
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useData } from "../../context/DatabaseContext";
 import { toast } from "react-hot-toast";
-import useAdmin from "../../hooks/useAdmin";
 import { AuthContext } from "../../context/AuthContext";
 import useTeacher from "../../hooks/useTeacher";
 
@@ -11,7 +9,7 @@ export default function RequisitionContainer() {
   const { user } = useContext(AuthContext);
   let navigate = useNavigate();
   const [isTeacher] = useTeacher(user?.email);
-  console.log(isTeacher);
+
   let [sid, setSid] = useState("");
   let [name, setName] = useState("");
   let [dept, setDept] = useState("");
@@ -20,7 +18,7 @@ export default function RequisitionContainer() {
   let [date, setDate] = useState("");
   let [reason, setReason] = useState("");
   let [EmployeeId, setEmployeeId] = useState("");
-  let { postRequisition } = useData();
+
   let [role, setRole] = useState();
 
   function onSubmitHandle(e) {

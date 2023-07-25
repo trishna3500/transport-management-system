@@ -47,7 +47,7 @@ export default function AddBusSchedule() {
               <option value="Student">Student</option>
               <option value="Teacher">Teacher</option>
               <option value="Employee">Employee</option>
-              <option value="Teacher + Employee">Teacher + Employee</option>
+              {/* <option value="Teacher + Employee">Teacher + Employee</option> */}
             </select>
           </div>
           <div>

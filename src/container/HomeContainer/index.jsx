@@ -30,6 +30,12 @@ export default function HomeContainer() {
       bus.location === "fromshohor" &&
       bus.day === "Sunday to Thursday"
   );
+  const employeeFromShohor = busSchedule?.data?.filter(
+    (bus) =>
+      bus.busType === "Employee" &&
+      bus.location === "fromshohor" &&
+      bus.day === "Sunday to Thursday"
+  );
   const studentFromCampus = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Student" &&
@@ -39,6 +45,12 @@ export default function HomeContainer() {
   const teacherFromCampus = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Teacher" &&
+      bus.location === "fromcampus" &&
+      bus.day === "Sunday to Thursday"
+  );
+  const employeeFromCampus = busSchedule?.data?.filter(
+    (bus) =>
+      bus.busType === "Employee" &&
       bus.location === "fromcampus" &&
       bus.day === "Sunday to Thursday"
   );
@@ -54,6 +66,12 @@ export default function HomeContainer() {
       bus.busType === "Teacher" &&
       bus.location === "fromcampus"
   );
+  const weekendBusForEmployeeFromCampus = busSchedule?.data?.filter(
+    (bus) =>
+      bus.day !== "Sunday to Thursday" &&
+      bus.busType === "Employee" &&
+      bus.location === "fromcampus"
+  );
   const weekendBusForStudentsFromShohor = busSchedule?.data?.filter(
     (bus) =>
       bus.day !== "Sunday to Thursday" &&
@@ -64,6 +82,12 @@ export default function HomeContainer() {
     (bus) =>
       bus.day !== "Sunday to Thursday" &&
       bus.busType === "Teacher" &&
+      bus.location === "fromshohor"
+  );
+  const weekendBusForEmployeeFromShohor = busSchedule?.data?.filter(
+    (bus) =>
+      bus.day !== "Sunday to Thursday" &&
+      bus.busType === "Employee" &&
       bus.location === "fromshohor"
   );
   // console.log(
@@ -156,6 +180,12 @@ export default function HomeContainer() {
             special={false}
             title="For Teachers"
           />
+          {/* Employee from Shohor  */}
+          <Schedule
+            data={employeeFromShohor}
+            special={false}
+            title="For Employee"
+          />
           <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
             From Campus
           </h1>
@@ -170,6 +200,12 @@ export default function HomeContainer() {
             data={teacherFromCampus}
             special={false}
             title="For Teachers"
+          />
+          {/* Employee from campus  */}
+          <Schedule
+            data={employeeFromCampus}
+            special={false}
+            title="For Employee"
           />
 
           {/* special trip  */}
@@ -189,6 +225,11 @@ export default function HomeContainer() {
             data={weekendBusForTeachersFromShohor}
             title="For Teachers"
           />
+          <Schedule
+            data={weekendBusForEmployeeFromShohor}
+            title="For Employee"
+          />
+
           <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
             From Campus
           </h1>
@@ -199,6 +240,10 @@ export default function HomeContainer() {
           <Schedule
             data={weekendBusForTeachersFromCampus}
             title="For Teachers"
+          />
+          <Schedule
+            data={weekendBusForEmployeeFromCampus}
+            title="For Employee"
           />
         </div>
       </div>

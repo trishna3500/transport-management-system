@@ -1,17 +1,15 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { getAuth, updateProfile } from "firebase/auth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import useAdmin from "../../hooks/useAdmin";
 
 const SignUp = () => {
   const { userSignUp } = useContext(AuthContext);
   const auth = getAuth();
-  const { user } = useContext(AuthContext);
-  const [isAdmin] = useAdmin(user?.email);
+
   const navigate = useNavigate();
-  const location = useLocation();
+
   const handleSignUp = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -165,9 +163,7 @@ const SignUp = () => {
               </button>
             </div>
           </form>
-          <div className="flex mt-5">
-            {/* <GoogleButton onClick={signInWIthGoogle}></GoogleButton> */}
-          </div>
+          <div className="flex mt-5"></div>
         </div>
       </main>
     </div>

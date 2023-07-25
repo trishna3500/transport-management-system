@@ -13,12 +13,13 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
     const location = form.location?.value;
 
     const updatedInfo = {
-      busType: busType,
-      schedule: schedule,
-      busNumber: busNumber,
-      day: day,
-      location: location,
+      busType: busType || data?.busNumber,
+      schedule: schedule || data?.schedule,
+      busNumber: busNumber || data?.busNumber,
+      day: day || data?.day,
+      location: location || data?.location,
     };
+    console.log(updatedInfo);
     fetch(`http://localhost:5000/api/v1/edit-schedule/${data._id}`, {
       method: "PATCH",
       headers: {
@@ -30,6 +31,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
       .then((data) => {
         console.log(data);
         toast.success("Updated Bus Schedule");
+        window.location.reload();
       });
   }
   return (
@@ -75,7 +77,9 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                         >
                           <div>
                             <select className="w-full border" name="busType">
-                              <option>Choose trip name</option>
+                              <option value={data?.busType}>
+                                {data?.busType}
+                              </option>
                               <option value="Student">Student</option>
                               <option value="Teacher">Teacher</option>
                               <option value="Employee">Employee</option>
@@ -104,7 +108,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                           </div>
                           <div className="">
                             <select className="w-full border" name="day">
-                              <option>Choose day</option>
+                              <option value={data?.day}>{data?.day}</option>
                               <option value="Sunday to Thursday">
                                 Sunday to Thursday
                               </option>
