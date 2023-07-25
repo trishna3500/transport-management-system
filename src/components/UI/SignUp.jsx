@@ -53,7 +53,7 @@ const SignUp = () => {
       <img
         src="https://i.ibb.co/RCVx0tv/signupBg.jpg"
         alt=""
-        className="w-2/3 min-h-screen"
+        className="w-2/3 min-h-screen "
       />
 
       <main

@@ -56,8 +56,10 @@ export default function ViewRequisitionTable({ data }) {
   };
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-      <h1>View Requisition</h1>
-      <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
+      <h1 className="text-center text-4xl italic font-bold mb-7">
+        All Requisitions
+      </h1>
+      <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden mx-4">
         <table className="min-w-full leading-normal">
           <thead>
             <tr>
@@ -76,7 +78,7 @@ export default function ViewRequisitionTable({ data }) {
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Department
               </th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <th className="px-2 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Level/Semester
               </th>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
@@ -122,7 +124,7 @@ export default function ViewRequisitionTable({ data }) {
                       {item.dept}
                     </p>
                   </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <td className="px-3 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
                       {item.ls}
                     </p>

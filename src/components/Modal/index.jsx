@@ -1,17 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
-import { useData } from "../../context/DatabaseContext";
+import { Fragment } from "react";
 import { toast } from "react-hot-toast";
 
 export default function EditScheduleModal({ isOpen, closeModal, data }) {
-  let [trip, setTrip] = useState(data.trip);
-  let [time, setTime] = useState(data.time);
-  let [bus, setBus] = useState(data.bus);
-  let [day, setDay] = useState(data.day);
-  let [type, setType] = useState(data.type);
-  console.log(data);
-  let { editSchedule } = useData();
-
   function handleEditSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -20,7 +11,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
     const busNumber = form.busNumber?.value;
     const day = form.day?.value;
     const location = form.location?.value;
-    console.log(busType, schedule, busNumber, day, location);
+
     const updatedInfo = {
       busType: busType,
       schedule: schedule,
@@ -71,11 +62,11 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="text-xl font-medium leading-6 text-gray-900 text-center"
                   >
                     Edit Schedule
                   </Dialog.Title>
-                  <div className="mt-2 px-20 py-10">
+                  <div className="mt-2 px-2 py-10">
                     <div className="container">
                       <div className="flex justify-center">
                         <form
@@ -139,14 +130,8 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                             <label for="fromshohor">From Sohor</label>
                           </div>
                           <div className="flex space-x-3">
-                            {/* <input
-                              type="submit"
-                              value="Edit"
-                              // onClick={closeModal}
-                              className="bg-lime-500 rounded-md px-5 py-2 text-white"
-                            /> */}
-                            <button className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-orange-500 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
-                              Add Schedule
+                            <button className="inline-flex justify-center rounded-md border border-transparent bg-green-300 px-4 py-2 text-sm font-medium  hover:bg-green-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                              Confirm
                             </button>
                           </div>
                         </form>

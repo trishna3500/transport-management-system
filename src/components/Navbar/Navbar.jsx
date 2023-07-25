@@ -24,7 +24,10 @@ export default function Navbar() {
   }, [user?.email]);
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure
+      as="nav"
+      className="backdrop-blur-lg bg-gradient-to-r from-gray-700 via-gray-900 to-black"
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -42,72 +45,74 @@ export default function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                    <Link to="/">
-                      <button className="text-white font-semibold text-xl">
-                        Home
-                      </button>
-                    </Link>
-                    {!user && (
-                      <>
-                        <Link to="/signup">
+                  <div className="hidden sm:ml-6 sm:block">
+                    <div className="flex space-x-4">
+                      <Link to="/">
+                        <div className="flex gap-3">
+                          <img
+                            className="block h-8 w-auto "
+                            src="https://i.ibb.co/RcxvNwJ/bus.png"
+                            alt="Your Company"
+                          />
                           <button className="text-white font-semibold text-xl">
-                            Sign Up
+                            HSTU TMS
                           </button>
-                        </Link>
-                        <Link to="/signin">
-                          <button className="text-white font-semibold text-xl">
-                            Sign In
-                          </button>
-                        </Link>
-                      </>
-                    )}
+                        </div>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div
-                  className=" tooltip tooltip-bottom"
-                  data-tip={
-                    userHasRequisition
-                      ? `you have ${userRequisitions} requisition approved `
-                      : `0 requisitions approved`
-                  }
-                >
-                  <button className="btn">
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
-                {/* <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                </button> */}
+                {user?.email && (
+                  <div
+                    className=" tooltip tooltip-bottom"
+                    data-tip={
+                      userHasRequisition
+                        ? `you have ${userRequisitions} requisition approved `
+                        : `0 requisitions approved`
+                    }
+                  >
+                    <button className="btn bg-neutral-focus text-white border-none ">
+                      <BellIcon className="h-6 w-6" aria-hidden="true" />
+                      <div className="badge badge-error ml-[-12px]">
+                        {userRequisitions}
+                      </div>
+                    </button>
+                  </div>
+                )}
 
-                {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </Menu.Button>
+                  <div className="flex">
+                    {user?.email ? (
+                      <>
+                        {" "}
+                        <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <span className="sr-only">Open user menu</span>
+
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80"
+                            alt=""
+                          />
+                        </Menu.Button>
+                      </>
+                    ) : (
+                      <div className="flex gap-4">
+                        <Link to="/signup">
+                          <button className="bg-green-400 px-4 py-1 rounded-md hover:rounded-3xl hover:bg-green-500">
+                            <h1 className="font-semibold text-lg">New Here?</h1>
+                          </button>
+                        </Link>
+                        <Link to="/signin">
+                          <button className="mt-[5px]">
+                            <h1 className="font-semibold text-lg text-white underline">
+                              Sign in
+                            </h1>
+                          </button>
+                        </Link>
+                      </div>
+                    )}
                   </div>
                   <Transition
                     as={Fragment}
@@ -119,45 +124,67 @@ export default function Navbar() {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                      {user?.email && (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              {user?.email}
+                            </a>
+                          )}
+                        </Menu.Item>
+                      )}
+                      {!user?.email && (
+                        <div>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                to="/signin"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm "
+                                )}
+                              >
+                                Sign in
+                              </Link>
                             )}
-                          >
-                            Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                to="/signup"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Sign up
+                              </Link>
                             )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button
-                            onClick={logout}
-                            className={classNames(
-                              active ? "bg-gray-100 w-full text-left" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Sign out
-                          </button>
-                        )}
-                      </Menu.Item>
+                          </Menu.Item>
+                        </div>
+                      )}
+
+                      {user?.email && (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={logout}
+                              className={classNames(
+                                active ? "bg-gray-100 w-full text-left" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Sign out
+                            </button>
+                          )}
+                        </Menu.Item>
+                      )}
                     </Menu.Items>
                   </Transition>
                 </Menu>
