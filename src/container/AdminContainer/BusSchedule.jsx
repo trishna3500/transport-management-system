@@ -20,6 +20,7 @@ export default function AddBusSchedule() {
       location: scheduleType,
     };
 
+    console.log(addedSchedule);
     fetch("http://localhost:5000/api/v1/add-schedule", {
       method: "POST",
       headers: {
@@ -75,7 +76,7 @@ export default function AddBusSchedule() {
               <option value="Saturday">Saturday</option>
             </select>
           </div>
-          <div>
+          <div className="flex gap-3">
             <input
               type="radio"
               name="scheduleType"
@@ -91,6 +92,13 @@ export default function AddBusSchedule() {
               value="fromshohor"
             />
             <label for="fromshohor">From Sohor</label>
+            <input
+              type="radio"
+              name="scheduleType"
+              id="fromTerminal"
+              value="fromTerminal"
+            />
+            <label for="fromshohor">From Terminal</label>
           </div>
           <div>
             <button className="bg-green-400 rounded-lg hover:bg-green-500 hover:rounded-2xl px-5 py-2 font-medium">

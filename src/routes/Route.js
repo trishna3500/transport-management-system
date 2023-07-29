@@ -5,7 +5,6 @@ import HomeContainer from "../container/HomeContainer";
 import ViewRequisitionPage from "../pages/ViewRequisitionPage";
 import AdminPanelPage from "../pages/AdminPanelPage";
 import { default as BusRequisition } from "../pages/BusRequisitionPage";
-import DriverInfoPage from "../pages/DriverInfoPage";
 import SignUp from "../components/UI/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
@@ -45,10 +44,6 @@ export const router = createBrowserRouter([
       {
         path: "/requisition",
         element: <BusRequisition></BusRequisition>,
-      },
-      {
-        path: "/driver",
-        element: <DriverInfoPage></DriverInfoPage>,
       },
     ],
   },

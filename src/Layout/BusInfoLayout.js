@@ -154,11 +154,10 @@ const BusInfoLayout = () => {
               <h1 className="text-center text-3xl font-bold">Bus Details</h1>
               <img src={busDetails?.image} alt="" className="h-60 w-96" />
               <h1 className="text-lg font-medium">
-                {" "}
-                Bus Number: {busDetails?.bNumber}{" "}
+                Bus Number: {busDetails?.bNumber}
               </h1>
               <h1 className="text-lg font-medium">
-                Capacity: {busDetails?.capacity}{" "}
+                Capacity: {busDetails?.capacity}
               </h1>
               <h1 className="text-lg font-medium">
                 Driver's Name: {busDetails?.DriverName}{" "}

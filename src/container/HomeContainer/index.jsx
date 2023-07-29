@@ -90,6 +90,49 @@ export default function HomeContainer() {
       bus.busType === "Employee" &&
       bus.location === "fromshohor"
   );
+
+  const studentFromTerminal = busSchedule?.data?.filter(
+    (bus) =>
+      bus.busType === "Student" &&
+      bus.location === "fromTerminal" &&
+      bus.day === "Sunday to Thursday"
+  );
+  const teacherFromTerminal = busSchedule?.data?.filter(
+    (bus) =>
+      bus.busType === "Teacher" &&
+      bus.location === "fromTerminal" &&
+      bus.day === "Sunday to Thursday"
+  );
+  const employeeFromTerminal = busSchedule?.data?.filter(
+    (bus) =>
+      bus.busType === "Employee" &&
+      bus.location === "fromTerminal" &&
+      bus.day === "Sunday to Thursday"
+  );
+  const weekendBusForStudentFromTerminal = busSchedule?.data?.filter(
+    (bus) =>
+      bus.busType === "Student" &&
+      bus.location === "fromTerminal" &&
+      bus.day !== "Sunday to Thursday"
+  );
+  const weekendBusForTeacherFromTerminal = busSchedule?.data?.filter(
+    (bus) =>
+      bus.busType === "Teacher" &&
+      bus.location === "fromTerminal" &&
+      bus.day !== "Sunday to Thursday"
+  );
+  const weekendBusForEmployeeFromTerminal = busSchedule?.data?.filter(
+    (bus) =>
+      bus.busType === "Employee" &&
+      bus.location === "fromTerminal" &&
+      bus.day !== "Sunday to Thursday"
+  );
+
+  // console.log(
+  //   weekendBusForStudentFromTerminal,
+  //   weekendBusForTeacherFromTerminal,
+  //   weekendBusForEmployeeFromTerminal
+  // );
   // console.log(
   //   "studentfromShohor:",
   //   studentFromShohor,
@@ -207,6 +250,27 @@ export default function HomeContainer() {
             special={false}
             title="For Employee"
           />
+          <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            From Terminal
+          </h1>
+          {/* Student from Terminal */}
+          <Schedule
+            data={studentFromTerminal}
+            special={false}
+            title="For Students"
+          />
+          {/* Teacher from Terminal  */}
+          <Schedule
+            data={teacherFromTerminal}
+            special={false}
+            title="For Teachers"
+          />
+          {/* Employee from Terminal  */}
+          <Schedule
+            data={employeeFromTerminal}
+            special={false}
+            title="For Employee"
+          />
 
           {/* special trip  */}
 
@@ -243,6 +307,21 @@ export default function HomeContainer() {
           />
           <Schedule
             data={weekendBusForEmployeeFromCampus}
+            title="For Employee"
+          />
+          <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
+            From Terminal
+          </h1>
+          <Schedule
+            data={weekendBusForStudentFromTerminal}
+            title="For Students"
+          />
+          <Schedule
+            data={weekendBusForTeacherFromTerminal}
+            title="For Teachers"
+          />
+          <Schedule
+            data={weekendBusForEmployeeFromTerminal}
             title="For Employee"
           />
         </div>
