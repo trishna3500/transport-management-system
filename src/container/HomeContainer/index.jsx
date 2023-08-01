@@ -97,12 +97,7 @@ export default function HomeContainer() {
       bus.location === "fromTerminal" &&
       bus.day === "Sunday to Thursday"
   );
-  const teacherFromTerminal = busSchedule?.data?.filter(
-    (bus) =>
-      bus.busType === "Teacher" &&
-      bus.location === "fromTerminal" &&
-      bus.day === "Sunday to Thursday"
-  );
+ 
   const employeeFromTerminal = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Employee" &&
@@ -115,12 +110,7 @@ export default function HomeContainer() {
       bus.location === "fromTerminal" &&
       bus.day !== "Sunday to Thursday"
   );
-  const weekendBusForTeacherFromTerminal = busSchedule?.data?.filter(
-    (bus) =>
-      bus.busType === "Teacher" &&
-      bus.location === "fromTerminal" &&
-      bus.day !== "Sunday to Thursday"
-  );
+  
   const weekendBusForEmployeeFromTerminal = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Employee" &&
@@ -259,12 +249,8 @@ export default function HomeContainer() {
             special={false}
             title="For Students"
           />
-          {/* Teacher from Terminal  */}
-          <Schedule
-            data={teacherFromTerminal}
-            special={false}
-            title="For Teachers"
-          />
+          
+        
           {/* Employee from Terminal  */}
           <Schedule
             data={employeeFromTerminal}
@@ -316,10 +302,7 @@ export default function HomeContainer() {
             data={weekendBusForStudentFromTerminal}
             title="For Students"
           />
-          <Schedule
-            data={weekendBusForTeacherFromTerminal}
-            title="For Teachers"
-          />
+         
           <Schedule
             data={weekendBusForEmployeeFromTerminal}
             title="For Employee"

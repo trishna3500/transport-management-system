@@ -57,7 +57,7 @@ export default function LoginContainer() {
             </h2>
           </div>
           <form className="mt-8 space-y-6" onSubmit={onFormSubmit}>
-            {show && <span>{error}</span>}
+            {show && <span className="text-red-400 text-2xl">{error}</span>}
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
