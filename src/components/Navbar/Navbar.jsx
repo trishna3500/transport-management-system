@@ -72,7 +72,7 @@ export default function Navbar() {
                     data-tip={
                       userHasRequisition
                         ? `you have ${userRequisitions} requisition approved `
-                        : `0 requisitions approved`
+                        : `0 requisitions approved `
                     }
                   >
                     <button className="btn bg-neutral-focus text-white border-none ">
