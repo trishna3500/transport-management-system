@@ -88,17 +88,17 @@ export default function AddBusSchedule() {
             <input
               type="radio"
               name="scheduleType"
-              id="fromshohor"
-              value="fromshohor"
+              id="fromtown"
+              value="fromtown"
             />
-            <label for="fromshohor">From Sohor</label>
+            <label for="fromtown">From Town</label>
             <input
               type="radio"
               name="scheduleType"
               id="fromTerminal"
               value="fromTerminal"
             />
-            <label for="fromshohor">From Terminal</label>
+            <label for="fromtown">From Terminal</label>
           </div>
           <div>
             <button className="bg-green-400 rounded-lg hover:bg-green-500 hover:rounded-2xl px-5 py-2 font-medium">
