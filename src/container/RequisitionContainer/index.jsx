@@ -3,13 +3,13 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext";
-import useTeacher from "../../hooks/useTeacher";
+import useUser from "../../hooks/useUser";
 
 export default function RequisitionContainer() {
   const { user } = useContext(AuthContext);
   let navigate = useNavigate();
-  const [isTeacher] = useTeacher(user?.email);
-
+  const [isUser, isUserLoading, userData] = useUser(user?.email);
+  console.log(isUser, isUserLoading, userData);
   let [sid, setSid] = useState("");
   let [name, setName] = useState("");
   let [dept, setDept] = useState("");
@@ -19,15 +19,9 @@ export default function RequisitionContainer() {
   let [reason, setReason] = useState("");
   let [EmployeeId, setEmployeeId] = useState("");
 
-  let [role, setRole] = useState();
-
   function onSubmitHandle(e) {
-    if (isTeacher) {
-      setRole("Teacher");
-    } else {
-      setRole("Student");
-    }
     e.preventDefault();
+
     const requisitionData = {
       name: name,
       id: sid,
@@ -38,7 +32,7 @@ export default function RequisitionContainer() {
       reason: reason,
       isVerified: "false",
       employeeId: EmployeeId,
-      role: role,
+      role: userData.role,
       email: user?.email,
     };
     console.log(requisitionData);
@@ -73,21 +67,21 @@ export default function RequisitionContainer() {
             <input
               type="text"
               name="name"
-              id=""
+              required
               className="w-full border"
               placeholder="Enter Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          {!isTeacher ? (
+          {userData?.role === "student" ? (
             <>
               {" "}
               <div>
                 <input
                   type="text"
                   name="studentId"
-                  id=""
+                  required
                   className="w-full border"
                   placeholder="Enter Student ID"
                   value={sid}
@@ -101,7 +95,7 @@ export default function RequisitionContainer() {
                 <input
                   type="text"
                   name="EmployeeId"
-                  id=""
+                  required
                   className="w-full border"
                   placeholder="Enter Employee ID"
                   value={EmployeeId}
@@ -115,7 +109,7 @@ export default function RequisitionContainer() {
             <input
               type="text"
               name="faculty"
-              id=""
+              required
               className="w-full border"
               placeholder="Enter Faculty"
               value={faculty}
@@ -126,19 +120,19 @@ export default function RequisitionContainer() {
             <input
               type="text"
               name="department"
-              id=""
+              required
               className="w-full border"
               placeholder="Enter Department"
               value={dept}
               onChange={(e) => setDept(e.target.value)}
             />
           </div>
-          {!isTeacher && (
+          {userData?.role === "student" && (
             <div>
               <input
                 type="text"
                 name="semester"
-                id=""
+                required
                 className="w-full border"
                 placeholder="Level Semester"
                 value={ls}
@@ -151,7 +145,7 @@ export default function RequisitionContainer() {
             <input
               type="date"
               name="date"
-              id=""
+              required
               className="w-full border"
               placeholder="date"
               value={date}
@@ -161,7 +155,7 @@ export default function RequisitionContainer() {
           <div>
             <textarea
               name="reason"
-              id=""
+              required
               rows="5"
               placeholder="Your Reason in short"
               className="border w-full"

@@ -3,13 +3,13 @@ import Schedule from "../../components/Table";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import useAdmin from "../../hooks/useAdmin";
-import useTeacher from "../../hooks/useTeacher";
+import useUser from "../../hooks/useUser";
 
 export default function HomeContainer() {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
-  const [isTeacher] = useTeacher(user?.email);
-  console.log(isTeacher);
+  const [isUser] = useUser(user?.email);
+  console.log(isUser);
   const [busSchedule, setBusSchedule] = useState();
   useEffect(() => {
     fetch("http://localhost:5000/api/v1/all-bus")
@@ -97,7 +97,7 @@ export default function HomeContainer() {
       bus.location === "fromTerminal" &&
       bus.day === "Sunday to Thursday"
   );
- 
+
   const employeeFromTerminal = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Employee" &&
@@ -110,7 +110,7 @@ export default function HomeContainer() {
       bus.location === "fromTerminal" &&
       bus.day !== "Sunday to Thursday"
   );
-  
+
   const weekendBusForEmployeeFromTerminal = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Employee" &&
@@ -249,8 +249,7 @@ export default function HomeContainer() {
             special={false}
             title="For Students"
           />
-          
-        
+
           {/* Employee from Terminal  */}
           <Schedule
             data={employeeFromTerminal}
@@ -302,7 +301,7 @@ export default function HomeContainer() {
             data={weekendBusForStudentFromTerminal}
             title="For Students"
           />
-         
+
           <Schedule
             data={weekendBusForEmployeeFromTerminal}
             title="For Employee"
