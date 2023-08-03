@@ -83,9 +83,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                               <option value="Student">Student</option>
                               <option value="Teacher">Teacher</option>
                               <option value="Employee">Employee</option>
-                              <option value="Teacher + Employee">
-                                Teacher + Employee
-                              </option>
+                              
                             </select>
                           </div>
                           <div>
@@ -128,10 +126,10 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                             <input
                               type="radio"
                               name="location"
-                              id="fromshohor"
-                              value="fromshohor"
+                              id="fromtown"
+                              value="fromtown"
                             />
-                            <label for="fromshohor">From Sohor</label>
+                            <label for="fromtown">From Town</label>
                           </div>
                           <div className="flex space-x-3">
                             <button className="inline-flex justify-center rounded-md border border-transparent bg-green-300 px-4 py-2 text-sm font-medium  hover:bg-green-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
