@@ -16,6 +16,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [userHasRequisition, setUserHasRequisition] = useState([]);
+  console.log(userHasRequisition);
   const userRequisitions = userHasRequisition.length;
   const { user, logout } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
@@ -70,8 +71,8 @@ export default function Navbar() {
                   <div
                     className=" tooltip tooltip-bottom"
                     data-tip={
-                      userHasRequisition
-                        ? `you have ${userRequisitions} requisition approved `
+                      userHasRequisition.length > 0
+                        ? `you have ${userRequisitions} requisition approved for reason: ${userHasRequisition[0]?.reason}`
                         : `0 requisitions approved `
                     }
                   >

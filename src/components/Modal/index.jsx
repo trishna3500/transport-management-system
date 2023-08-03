@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { toast } from "react-hot-toast";
 
 export default function EditScheduleModal({ isOpen, closeModal, data }) {
+  console.log(data);
   function handleEditSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -31,7 +32,6 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
       .then((data) => {
         console.log(data);
         toast.success("Updated Bus Schedule");
-        window.location.reload();
       });
   }
   return (
