@@ -11,6 +11,7 @@ import AdminRoute from "./AdminRoute";
 import AddBusSchedule from "../container/AdminContainer/BusSchedule";
 import TeacherSignUp from "../components/UI/TeacherSignUp";
 import BusInfoLayout from "../Layout/BusInfoLayout";
+import EmployeeSignUp from "../components/UI/EmployeeSignUp";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/teacher-signup",
         element: <TeacherSignUp></TeacherSignUp>,
+      },
+      {
+        path: "/employee-signup",
+        element: <EmployeeSignUp></EmployeeSignUp>,
       },
       {
         path: "/view-requisition",
