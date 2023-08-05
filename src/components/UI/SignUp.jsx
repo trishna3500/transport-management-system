@@ -25,6 +25,7 @@ const SignUp = () => {
       studentID: studentID,
       phoneNumber: phoneNumber,
       password: password,
+      isVerified: false,
     };
     fetch(`http://localhost:5000/api/v1/user`, {
       method: "POST",
