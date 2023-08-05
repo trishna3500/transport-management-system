@@ -17,23 +17,23 @@ export default function HomeContainer() {
       .then((data) => setBusSchedule(data));
   }, []);
 
-  const studentFromShohor = busSchedule?.data?.filter(
+  const studentFromTown = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Student" &&
-      bus.location === "fromshohor" &&
+      bus.location === "fromtown" &&
       bus.day === "Sunday to Thursday"
   );
 
-  const teacherFromShohor = busSchedule?.data?.filter(
+  const teacherFromTown= busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Teacher" &&
-      bus.location === "fromshohor" &&
+      bus.location === "fromtown" &&
       bus.day === "Sunday to Thursday"
   );
-  const employeeFromShohor = busSchedule?.data?.filter(
+  const employeeFromTown = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Employee" &&
-      bus.location === "fromshohor" &&
+      bus.location === "fromtown" &&
       bus.day === "Sunday to Thursday"
   );
   const studentFromCampus = busSchedule?.data?.filter(
@@ -72,23 +72,23 @@ export default function HomeContainer() {
       bus.busType === "Employee" &&
       bus.location === "fromcampus"
   );
-  const weekendBusForStudentsFromShohor = busSchedule?.data?.filter(
+  const weekendBusForStudentsFromTown = busSchedule?.data?.filter(
     (bus) =>
       bus.day !== "Sunday to Thursday" &&
       bus.busType === "Student" &&
-      bus.location === "fromshohor"
+      bus.location === "fromtown"
   );
-  const weekendBusForTeachersFromShohor = busSchedule?.data?.filter(
+  const weekendBusForTeachersFromTown = busSchedule?.data?.filter(
     (bus) =>
       bus.day !== "Sunday to Thursday" &&
       bus.busType === "Teacher" &&
-      bus.location === "fromshohor"
+      bus.location === "fromtown"
   );
-  const weekendBusForEmployeeFromShohor = busSchedule?.data?.filter(
+  const weekendBusForEmployeeFromTown = busSchedule?.data?.filter(
     (bus) =>
       bus.day !== "Sunday to Thursday" &&
       bus.busType === "Employee" &&
-      bus.location === "fromshohor"
+      bus.location === "fromtown"
   );
 
   const studentFromTerminal = busSchedule?.data?.filter(
@@ -208,22 +208,22 @@ export default function HomeContainer() {
           <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
             From Town
           </h1>
-          {/* Student from Shohor  */}
+          {/* Student from Town  */}
           <Schedule
-            data={studentFromShohor}
+            data={studentFromTown}
             special={false}
             title="For Students"
           />
 
-          {/* Teacher from Shohor  */}
+          {/* Teacher from Town  */}
           <Schedule
-            data={teacherFromShohor}
+            data={teacherFromTown}
             special={false}
             title="For Teachers"
           />
-          {/* Employee from Shohor  */}
+          {/* Employee from Town  */}
           <Schedule
-            data={employeeFromShohor}
+            data={employeeFromTown}
             special={false}
             title="For Employee"
           />
@@ -275,15 +275,15 @@ export default function HomeContainer() {
           </h1>
           {/* Student special Bus From Campus  */}
           <Schedule
-            data={weekendBusForStudentsFromShohor}
+            data={weekendBusForStudentsFromTown}
             title="For Students"
           />
           <Schedule
-            data={weekendBusForTeachersFromShohor}
+            data={weekendBusForTeachersFromTown}
             title="For Teachers"
           />
           <Schedule
-            data={weekendBusForEmployeeFromShohor}
+            data={weekendBusForEmployeeFromTown}
             title="For Employee"
           />
 

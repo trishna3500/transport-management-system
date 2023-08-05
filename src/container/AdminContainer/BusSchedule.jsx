@@ -98,7 +98,7 @@ export default function AddBusSchedule() {
               id="fromTerminal"
               value="fromTerminal"
             />
-            <label for="fromtown">From Terminal</label>
+            <label for="fromterminal">From Terminal</label>
           </div>
           <div>
             <button className="bg-green-400 rounded-lg hover:bg-green-500 hover:rounded-2xl px-5 py-2 font-medium">
