@@ -6,17 +6,22 @@ import useAdmin from "../../hooks/useAdmin";
 import useUser from "../../hooks/useUser";
 
 export default function HomeContainer() {
+  const [role, setRole] = useState("");
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
-  const [isUser] = useUser(user?.email);
-  console.log(isUser);
+  const [isUser, userData, userRole] = useUser(user?.email);
+  console.log(isUser, userData, userRole.role);
+
   const [busSchedule, setBusSchedule] = useState();
   useEffect(() => {
     fetch("http://localhost:5000/api/v1/all-bus")
       .then((res) => res.json())
-      .then((data) => setBusSchedule(data));
+      .then((data) => {
+        setBusSchedule(data);
+        setRole(userRole.role);
+      });
   }, []);
-
+  console.log(role);
   const studentFromTown = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Student" &&
@@ -24,7 +29,7 @@ export default function HomeContainer() {
       bus.day === "Sunday to Thursday"
   );
 
-  const teacherFromTown= busSchedule?.data?.filter(
+  const teacherFromTown = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Teacher" &&
       bus.location === "fromtown" &&
@@ -149,15 +154,13 @@ export default function HomeContainer() {
             </h2>
             <div className="flex justify-end space-x-5">
               {isAdmin && (
-                <Link to="/add-schedule">
-                  <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
-                    <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                    Add Schedule
-                  </button>
-                </Link>
-              )}
-              {isAdmin && (
                 <div className="flex gap-4">
+                  <Link to="/add-schedule">
+                    <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
+                      <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                      Add Schedule
+                    </button>
+                  </Link>
                   <Link to="/teacher-signup">
                     <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
                       <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
@@ -209,61 +212,80 @@ export default function HomeContainer() {
             From Town
           </h1>
           {/* Student from Town  */}
-          <Schedule
-            data={studentFromTown}
-            special={false}
-            title="For Students"
-          />
-
+          {userRole.role === "student" && (
+            <Schedule
+              data={studentFromTown}
+              special={false}
+              title="For Students"
+            />
+          )}
           {/* Teacher from Town  */}
-          <Schedule
-            data={teacherFromTown}
-            special={false}
-            title="For Teachers"
-          />
+          {userRole.role === "teacher" && (
+            <Schedule
+              data={teacherFromTown}
+              special={false}
+              title="For Teachers"
+            />
+          )}
           {/* Employee from Town  */}
-          <Schedule
-            data={employeeFromTown}
-            special={false}
-            title="For Employee"
-          />
+          {userRole.role === "employee" && (
+            <Schedule
+              data={employeeFromTown}
+              special={false}
+              title="For Employee"
+            />
+          )}
+
           <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
             From Campus
           </h1>
           {/* Student from campus */}
-          <Schedule
-            data={studentFromCampus}
-            special={false}
-            title="For Students"
-          />
+          {userRole.role === "student" && (
+            <Schedule
+              data={studentFromCampus}
+              special={false}
+              title="For Students"
+            />
+          )}
           {/* Teacher from campus  */}
-          <Schedule
-            data={teacherFromCampus}
-            special={false}
-            title="For Teachers"
-          />
+          {userRole.role === "teacher" && (
+            <Schedule
+              data={teacherFromCampus}
+              special={false}
+              title="For Teachers"
+            />
+          )}
           {/* Employee from campus  */}
-          <Schedule
-            data={employeeFromCampus}
-            special={false}
-            title="For Employee"
-          />
-          <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-            From Terminal
-          </h1>
+          {userRole.role === "employee" && (
+            <Schedule
+              data={employeeFromCampus}
+              special={false}
+              title="For Employee"
+            />
+          )}
+          {userRole.role !== "teacher" && (
+            <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+              From Terminal
+            </h1>
+          )}
+
           {/* Student from Terminal */}
-          <Schedule
-            data={studentFromTerminal}
-            special={false}
-            title="For Students"
-          />
+          {userRole.role === "student" && (
+            <Schedule
+              data={studentFromTerminal}
+              special={false}
+              title="For Students"
+            />
+          )}
 
           {/* Employee from Terminal  */}
-          <Schedule
-            data={employeeFromTerminal}
-            special={false}
-            title="For Employee"
-          />
+          {userRole.role === "employee" && (
+            <Schedule
+              data={employeeFromTerminal}
+              special={false}
+              title="For Employee"
+            />
+          )}
 
           {/* special trip  */}
 
@@ -274,46 +296,64 @@ export default function HomeContainer() {
             From Town
           </h1>
           {/* Student special Bus From Campus  */}
-          <Schedule
-            data={weekendBusForStudentsFromTown}
-            title="For Students"
-          />
-          <Schedule
-            data={weekendBusForTeachersFromTown}
-            title="For Teachers"
-          />
-          <Schedule
-            data={weekendBusForEmployeeFromTown}
-            title="For Employee"
-          />
+          {userRole.role === "student" && (
+            <Schedule
+              data={weekendBusForStudentsFromTown}
+              title="For Students"
+            />
+          )}
+          {userRole.role === "teacher" && (
+            <Schedule
+              data={weekendBusForTeachersFromTown}
+              title="For Teachers"
+            />
+          )}
+          {userRole.role === "employee" && (
+            <Schedule
+              data={weekendBusForEmployeeFromTown}
+              title="For Employee"
+            />
+          )}
 
           <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
             From Campus
           </h1>
-          <Schedule
-            data={weekendBusForStudentsFromCampus}
-            title="For Students"
-          />
-          <Schedule
-            data={weekendBusForTeachersFromCampus}
-            title="For Teachers"
-          />
-          <Schedule
-            data={weekendBusForEmployeeFromCampus}
-            title="For Employee"
-          />
-          <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
-            From Terminal
-          </h1>
-          <Schedule
-            data={weekendBusForStudentFromTerminal}
-            title="For Students"
-          />
+          {userRole.role === "student" && (
+            <Schedule
+              data={weekendBusForStudentsFromCampus}
+              title="For Students"
+            />
+          )}
+          {userRole.role === "teacher" && (
+            <Schedule
+              data={weekendBusForTeachersFromCampus}
+              title="For Teachers"
+            />
+          )}
+          {userRole.role === "employee" && (
+            <Schedule
+              data={weekendBusForEmployeeFromCampus}
+              title="For Employee"
+            />
+          )}
+          {userRole !== "teacher" && (
+            <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
+              From Terminal
+            </h1>
+          )}
 
-          <Schedule
-            data={weekendBusForEmployeeFromTerminal}
-            title="For Employee"
-          />
+          {userRole.role === "student" && (
+            <Schedule
+              data={weekendBusForStudentFromTerminal}
+              title="For Students"
+            />
+          )}
+          {userRole.role === "employee" && (
+            <Schedule
+              data={weekendBusForEmployeeFromTerminal}
+              title="For Employee"
+            />
+          )}
         </div>
       </div>
     </div>

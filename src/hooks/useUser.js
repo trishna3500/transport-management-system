@@ -5,8 +5,9 @@ const useUser = (email) => {
   const { user } = useContext(AuthContext);
   console.log(user?.email);
   const [isUser, setIsUser] = useState(false);
+  const [userRole, setUserRole] = useState("");
   const [isUserLoading, setIsUserLoading] = useState(true);
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState({});
   useEffect(() => {
     if (email) {
       fetch(`http://localhost:5000/api/v1/users/user/${user?.email}`)
@@ -15,12 +16,19 @@ const useUser = (email) => {
           setIsUser(true);
           setIsUserLoading(false);
           setUserData(data.data[0]);
-          console.log(data);
+          if (data.data[0].role === "employee") {
+            setUserRole("employee");
+          } else if (data.data[0].role === "student") {
+            setUserRole("student");
+          } else {
+            setUserRole("admin");
+          }
+          console.log(data, userRole);
         });
     }
   }, [user?.email]);
-  console.log(isUser);
-  return [isUser, isUserLoading, userData];
+  console.log(isUser, userRole);
+  return [isUser, isUserLoading, userData, userRole];
 };
 
 export default useUser;
