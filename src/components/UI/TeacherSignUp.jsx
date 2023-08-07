@@ -18,14 +18,14 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const phoneNumber = form.phoneNumber.value;
-    const employeeID = form.employeeID.value;
+    const teacherID = form.teacherID.value;
     console.log(fullName, email, password, phoneNumber);
 
     const teacherInfo = {
       name: fullName,
       email: email,
       role: "teacher",
-      employeeId: employeeID,
+      teacherId: teacherID,
       phoneNumber: phoneNumber,
       password: password,
     };
@@ -112,14 +112,14 @@ const SignUp = () => {
                 for="FirstName"
                 class="block text-sm font-medium text-gray-700"
               >
-                Employee Id
+                Teacher Id
                 <span className="text-red-600 text-lg">*</span>
               </label>
 
               <input
                 type="number"
-                id="employeeID"
-                name="employeeID"
+                id="teacherID"
+                name="teacherID"
                 required
                 class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               />

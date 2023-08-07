@@ -20,6 +20,8 @@ const useUser = (email) => {
             setUserRole("employee");
           } else if (data.data[0].role === "student") {
             setUserRole("student");
+          } else if (data.data[0].role === "teacher") {
+            setUserRole("teacher");
           } else {
             setUserRole("admin");
           }
