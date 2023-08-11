@@ -173,6 +173,12 @@ export default function HomeContainer() {
                       Add Employee
                     </button>
                   </Link>
+                  <Link to="/all-users">
+                    <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
+                      <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                      All Users
+                    </button>
+                  </Link>
                 </div>
               )}
               {isAdmin && (
@@ -212,13 +218,14 @@ export default function HomeContainer() {
             From Town
           </h1>
           {/* Student from Town  */}
-          {userRole.role === "student" && (
-            <Schedule
-              data={studentFromTown}
-              special={false}
-              title="For Students"
-            />
-          )}
+          {userRole.role === "student" ||
+            (!user && (
+              <Schedule
+                data={studentFromTown}
+                special={false}
+                title="For Students"
+              />
+            ))}
           {/* Teacher from Town  */}
           {userRole.role === "teacher" && (
             <Schedule
@@ -228,64 +235,71 @@ export default function HomeContainer() {
             />
           )}
           {/* Employee from Town  */}
-          {userRole.role === "employee" && (
-            <Schedule
-              data={employeeFromTown}
-              special={false}
-              title="For Employee"
-            />
-          )}
+          {userRole.role === "employee" ||
+            (!user && (
+              <Schedule
+                data={employeeFromTown}
+                special={false}
+                title="For Employee"
+              />
+            ))}
 
           <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
             From Campus
           </h1>
           {/* Student from campus */}
-          {userRole.role === "student" && (
-            <Schedule
-              data={studentFromCampus}
-              special={false}
-              title="For Students"
-            />
-          )}
+          {userRole.role === "student" ||
+            (!user && (
+              <Schedule
+                data={studentFromCampus}
+                special={false}
+                title="For Students"
+              />
+            ))}
           {/* Teacher from campus  */}
-          {userRole.role === "teacher" && (
-            <Schedule
-              data={teacherFromCampus}
-              special={false}
-              title="For Teachers"
-            />
-          )}
+          {userRole.role === "teacher" ||
+            (!user && (
+              <Schedule
+                data={teacherFromCampus}
+                special={false}
+                title="For Teachers"
+              />
+            ))}
           {/* Employee from campus  */}
-          {userRole.role === "employee" && (
-            <Schedule
-              data={employeeFromCampus}
-              special={false}
-              title="For Employee"
-            />
-          )}
-          {userRole.role !== "teacher" && (
-            <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-              From Terminal
-            </h1>
-          )}
+          {userRole.role === "employee" ||
+            (!user && (
+              <Schedule
+                data={employeeFromCampus}
+                special={false}
+                title="For Employee"
+              />
+            ))}
+          {userRole.role !== "teacher" ||
+            (!user && (
+              <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+                From Terminal
+              </h1>
+            ))}
 
           {/* Student from Terminal */}
-          {userRole.role === "student" && (
-            <Schedule
-              data={studentFromTerminal}
-              special={false}
-              title="For Students"
-            />
-          )}
+          {userRole.role === "student" ||
+            (!user && (
+              <Schedule
+                data={studentFromTerminal}
+                special={false}
+                title="For Students"
+              />
+            ))}
 
           {/* Employee from Terminal  */}
-          {userRole.role === "employee" && (
-            <Schedule
-              data={employeeFromTerminal}
-              special={false}
-              title="For Employee"
-            />
-          )}
+          {userRole.role === "employee" ||
+            (!user && (
+              <Schedule
+                data={employeeFromTerminal}
+                special={false}
+                title="For Employee"
+              />
+            ))}
 
           {/* special trip  */}
 
@@ -296,64 +310,73 @@ export default function HomeContainer() {
             From Town
           </h1>
           {/* Student special Bus From Campus  */}
-          {userRole.role === "student" && (
-            <Schedule
-              data={weekendBusForStudentsFromTown}
-              title="For Students"
-            />
-          )}
-          {userRole.role === "teacher" && (
-            <Schedule
-              data={weekendBusForTeachersFromTown}
-              title="For Teachers"
-            />
-          )}
-          {userRole.role === "employee" && (
-            <Schedule
-              data={weekendBusForEmployeeFromTown}
-              title="For Employee"
-            />
-          )}
+          {userRole.role === "student" ||
+            (!user && (
+              <Schedule
+                data={weekendBusForStudentsFromTown}
+                title="For Students"
+              />
+            ))}
+          {userRole.role === "teacher" ||
+            (!user && (
+              <Schedule
+                data={weekendBusForTeachersFromTown}
+                title="For Teachers"
+              />
+            ))}
+          {userRole.role === "employee" ||
+            (!user && (
+              <Schedule
+                data={weekendBusForEmployeeFromTown}
+                title="For Employee"
+              />
+            ))}
 
           <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
             From Campus
           </h1>
-          {userRole.role === "student" && (
-            <Schedule
-              data={weekendBusForStudentsFromCampus}
-              title="For Students"
-            />
-          )}
-          {userRole.role === "teacher" && (
-            <Schedule
-              data={weekendBusForTeachersFromCampus}
-              title="For Teachers"
-            />
-          )}
-          {userRole.role === "employee" && (
-            <Schedule
-              data={weekendBusForEmployeeFromCampus}
-              title="For Employee"
-            />
-          )}
-          {userRole !== "teacher" && (
-            <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
-              From Terminal
-            </h1>
-          )}
+          {userRole.role === "student" ||
+            (!user && (
+              <Schedule
+                data={weekendBusForStudentsFromCampus}
+                title="For Students"
+              />
+            ))}
+          {userRole.role === "teacher" ||
+            (!user && (
+              <Schedule
+                data={weekendBusForTeachersFromCampus}
+                title="For Teachers"
+              />
+            ))}
+          {userRole.role === "employee" ||
+            (!user && (
+              <Schedule
+                data={weekendBusForEmployeeFromCampus}
+                title="For Employee"
+              />
+            ))}
+          {userRole !== "teacher" ||
+            (!user && (
+              <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
+                From Terminal
+              </h1>
+            ))}
 
-          {userRole.role === "student" && (
-            <Schedule
-              data={weekendBusForStudentFromTerminal}
-              title="For Students"
-            />
-          )}
-          {userRole.role === "employee" && (
-            <Schedule
-              data={weekendBusForEmployeeFromTerminal}
-              title="For Employee"
-            />
-          )}
+          {userRole.role === "student" ||
+            (!user && (
+              <Schedule
+                data={weekendBusForStudentFromTerminal}
+                title="For Students"
+              />
+            ))}
+          {userRole.role === "employee" ||
+            (!user && (
+              <Schedule
+                data={weekendBusForEmployeeFromTerminal}
+                title="For Employee"
+              />
+            ))}
         </div>
       </div>
     </div>

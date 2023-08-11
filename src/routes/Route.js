@@ -12,6 +12,7 @@ import AddBusSchedule from "../container/AdminContainer/BusSchedule";
 import TeacherSignUp from "../components/UI/TeacherSignUp";
 import BusInfoLayout from "../Layout/BusInfoLayout";
 import EmployeeSignUp from "../components/UI/EmployeeSignUp";
+import AllUsers from "../components/UI/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/all-users",
+        element: <AllUsers></AllUsers>,
       },
       {
         path: "/teacher-signup",

@@ -88,6 +88,14 @@ export default function AddBusSchedule() {
             <input
               type="radio"
               name="scheduleType"
+              id="fromCampusToTerminal"
+              value="fromCampusToTerminal"
+            />
+            <label for="fromcampus">From Campus (to Terminal)</label>
+            <br />
+            <input
+              type="radio"
+              name="scheduleType"
               id="fromtown"
               value="fromtown"
             />

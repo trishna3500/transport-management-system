@@ -20,23 +20,24 @@ const EmployeeSignUp = () => {
     const employeeID = form.employeeID.value;
     console.log(fullName, email, password, phoneNumber);
 
-    const teacherInfo = {
+    const EmployeeInfo = {
       name: fullName,
       email: email,
       role: "employee",
       employeeId: employeeID,
       phoneNumber: phoneNumber,
       password: password,
+      isVerified: true
     };
 
-    console.log(teacherInfo);
+    console.log(EmployeeInfo);
 
     fetch(`http://localhost:5000/api/v1/user`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(teacherInfo),
+      body: JSON.stringify(EmployeeInfo),
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
