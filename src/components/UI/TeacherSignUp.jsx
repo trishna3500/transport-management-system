@@ -28,7 +28,7 @@ const SignUp = () => {
       teacherId: teacherID,
       phoneNumber: phoneNumber,
       password: password,
-      isVerified: true
+      isVerified: true,
     };
 
     console.log(teacherInfo);

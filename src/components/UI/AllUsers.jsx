@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 
 const AllUsers = () => {
   const [allUsers, setAllUsers] = useState();
@@ -8,6 +9,26 @@ const AllUsers = () => {
       .then((data) => setAllUsers(data.data));
   }, []);
   console.log(allUsers);
+
+  const handleVerifyUser = (id) => {
+    const updatedInfo = {
+      isVerified: true,
+    };
+
+    fetch(`http://localhost:5000/api/v1/verify-user/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("User Verified Successfully");
+      });
+  };
+
   return (
     <div>
       <div class="overflow-x-auto mx-20">
@@ -39,79 +60,15 @@ const AllUsers = () => {
                   {user?.studentId ? user?.studentId : user?.employeeId}
                 </td>
                 <td class="whitespace-nowrap px-4 py-2">
-                  <a
-                    href="#"
+                  <button
+                    onClick={() => handleVerifyUser(user._id)}
                     class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
                   >
-                    View
-                  </a>
+                    Verify User
+                  </button>
                 </td>
               </tr>
             ))}
-            <tr>
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                John Doe
-              </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                24/05/1995
-              </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                Web Developer
-              </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                $120,000
-              </td>
-              <td class="whitespace-nowrap px-4 py-2">
-                <a
-                  href="#"
-                  class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                >
-                  View
-                </a>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Jane Doe
-              </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                04/11/1980
-              </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                Web Designer
-              </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                $100,000
-              </td>
-              <td class="whitespace-nowrap px-4 py-2">
-                <a
-                  href="#"
-                  class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                >
-                  View
-                </a>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Gary Barlow
-              </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                24/05/1995
-              </td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">Singer</td>
-              <td class="whitespace-nowrap px-4 py-2 text-gray-700">$20,000</td>
-              <td class="whitespace-nowrap px-4 py-2">
-                <a
-                  href="#"
-                  class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                >
-                  View
-                </a>
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
