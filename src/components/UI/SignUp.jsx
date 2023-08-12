@@ -3,9 +3,10 @@ import { AuthContext } from "../../context/AuthContext";
 import { getAuth, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import useUser from "../../hooks/useUser";
 
 const SignUp = () => {
-  const { userSignUp } = useContext(AuthContext);
+  const { user, userSignUp, logout } = useContext(AuthContext);
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -27,26 +28,50 @@ const SignUp = () => {
       password: password,
       isVerified: false,
     };
-    fetch(`http://localhost:5000/api/v1/user`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(userInfo),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
 
     userSignUp(email, password)
       .then((result) => {
+        console.log(result);
         const user = result.user;
-        console.log(user);
+        if (user?.email) {
+          fetch(`http://localhost:5000/api/v1/user`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(userInfo),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.success === true) {
+                fetch(`http://localhost:5000/api/v1/users/user/${user?.email}`)
+                  .then((res) => res.json())
+                  .then((data) => {
+                    if (
+                      data?.data[0]?.role === "student" &&
+                      data?.data[0]?.isVerified === false
+                    ) {
+                      navigate("/user-verification");
+                      logout();
+                    } else if (
+                      data?.data[0]?.role === "student" &&
+                      data?.data[0]?.isVerified === true
+                    ) {
+                      navigate("/");
+                    } else {
+                      navigate("/");
+                    }
+                  });
+              }
+            });
+        }
         updateProfile(auth.currentUser, {
           displayName: fullName,
         }).catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
-    navigate("/");
+    // navigate("/");
     toast.success("Signed up successfully");
   };
   return (

@@ -13,6 +13,7 @@ import TeacherSignUp from "../components/UI/TeacherSignUp";
 import BusInfoLayout from "../Layout/BusInfoLayout";
 import EmployeeSignUp from "../components/UI/EmployeeSignUp";
 import AllUsers from "../components/UI/AllUsers";
+import UserVerification from "../components/UI/UserVerification";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/user-verification",
+        element: <UserVerification></UserVerification>,
       },
       {
         path: "/all-users",
