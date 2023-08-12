@@ -3,13 +3,10 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-hot-toast";
-import useAdmin from "../../hooks/useAdmin";
 
 export default function LoginContainer() {
-  const { user } = useContext(AuthContext);
-  const [isAdmin] = useAdmin(user?.email);
-  console.log(isAdmin);
-  const navigates = useNavigate();
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,13 +22,34 @@ export default function LoginContainer() {
     console.log(email, password);
 
     try {
-      await userSignIn(email, password);
-
-      navigates("/");
+      await userSignIn(email, password).then((result) => {
+        const user = result.user;
+        if (user?.email) {
+          fetch(`http://localhost:5000/api/v1/users/user/${user?.email}`)
+            .then((res) => res.json())
+            .then((data) => {
+              if (
+                data?.data[0]?.role === "student" &&
+                data?.data[0]?.isVerified === false
+              ) {
+                navigate("/user-verification");
+                logout();
+              } else if (
+                data?.data[0]?.role === "student" &&
+                data?.data[0]?.isVerified === true
+              ) {
+                navigate("/");
+                toast.success("Signed in successfully");
+              } else {
+                navigate("/");
+                toast.success("Signed in successfully");
+              }
+            });
+        }
+      });
       setShow(true);
       setError("Loading");
       setErrorType("success");
-      toast.success("Signed in successfully");
     } catch (error) {
       // console.log(error.message);
       setError("Failed to Login!");
