@@ -92,37 +92,45 @@ export default function RequisitionContainer() {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          {userData?.role === "student" ? (
-            <>
-              {" "}
-              <div>
-                <input
-                  type="text"
-                  name="studentId"
-                  required
-                  className="w-full border"
-                  placeholder="Enter Student ID"
-                  value={sid}
-                  onChange={(e) => setSid(e.target.value)}
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <div>
-                <input
-                  type="text"
-                  name="EmployeeId"
-                  required
-                  className="w-full border"
-                  placeholder="Enter Employee ID"
-                  value={EmployeeId}
-                  onChange={(e) => setEmployeeId(e.target.value)}
-                />
-              </div>
-            </>
+          {userData?.role === "student" && (
+            <div>
+              <input
+                type="text"
+                name="studentId"
+                required
+                className="w-full border"
+                placeholder="Enter Student ID"
+                value={sid}
+                onChange={(e) => setSid(e.target.value)}
+              />
+            </div>
           )}
-
+          {userData?.role === "teacher" && (
+            <div>
+              <input
+                type="text"
+                name="EmployeeId"
+                required
+                className="w-full border"
+                placeholder="Enter Teacher ID"
+                value={EmployeeId}
+                onChange={(e) => setEmployeeId(e.target.value)}
+              />
+            </div>
+          )}
+          {userData?.role === "employee" && (
+            <div>
+              <input
+                type="text"
+                name="EmployeeId"
+                required
+                className="w-full border"
+                placeholder="Enter Employee ID"
+                value={EmployeeId}
+                onChange={(e) => setEmployeeId(e.target.value)}
+              />
+            </div>
+          )}
           <div>
             <input
               type="text"
@@ -158,7 +166,6 @@ export default function RequisitionContainer() {
               />
             </div>
           )}
-
           <div className="flex gap-5">
             <input
               type="date"
@@ -232,7 +239,6 @@ export default function RequisitionContainer() {
               onChange={(e) => setReason(e.target.value)}
             ></textarea>
           </div>
-
           <button className="bg-green-400 hover:bg-green-500 rounded-lg hover:rounded-xl px-5 py-2 w-24">
             {" "}
             Submit

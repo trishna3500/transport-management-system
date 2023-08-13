@@ -26,6 +26,7 @@ const AllUsers = () => {
       .then((data) => {
         console.log(data);
         toast.success("User Verified Successfully");
+        window.location.reload();
       });
   };
 
@@ -33,14 +34,15 @@ const AllUsers = () => {
     <div>
       <div class="overflow-x-auto mx-20">
         <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-          <thead class="ltr:text-left rtl:text-right">
+          <thead class="">
             <tr>
-              <th class=" text-start pl-5  py-2 font-medium text-gray-900">
-                Name
+              <th class=" text-start  font-medium text-gray-900">Name</th>
+              <th class=" text-start font-medium text-gray-900">Role</th>
+              <th class=" text-start font-medium text-gray-900">
+                Phone Number
               </th>
-              <th class=" pl-5  py-2 font-medium text-gray-900">Role</th>
-              <th class=" pl-5 py-2 font-medium text-gray-900">Phone Number</th>
-              <th class=" pl-5 py-2 font-medium text-gray-900">ID</th>
+              <th class=" text-start font-medium text-gray-900">ID</th>
+              <th class=" text-start font-medium text-gray-900">Status</th>
             </tr>
           </thead>
 
@@ -62,9 +64,13 @@ const AllUsers = () => {
                 <td class="whitespace-nowrap px-4 py-2">
                   <button
                     onClick={() => handleVerifyUser(user._id)}
-                    class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                    class={
+                      user?.isVerified === true
+                        ? "bg-green-400 px-3 py-2 rounded-full text-white"
+                        : "bg-yellow-300 px-3 py-2  rounded-full"
+                    }
                   >
-                    Verify User
+                    {user?.isVerified === true ? "Verified" : "Approve"}
                   </button>
                 </td>
               </tr>
