@@ -14,7 +14,6 @@ const AllUsers = () => {
     const updatedInfo = {
       isVerified: true,
     };
-
     fetch(`http://localhost:5000/api/v1/verify-user/${id}`, {
       method: "PATCH",
       headers: {
@@ -26,6 +25,18 @@ const AllUsers = () => {
       .then((data) => {
         console.log(data);
         toast.success("User Verified Successfully");
+        window.location.reload();
+      });
+  };
+
+  const handleDeleteUser = (id) => {
+    fetch(`http://localhost:5000/api/v1/user/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("User has been deleted");
         window.location.reload();
       });
   };
@@ -43,6 +54,7 @@ const AllUsers = () => {
               </th>
               <th class=" text-start font-medium text-gray-900">ID</th>
               <th class=" text-start font-medium text-gray-900">Status</th>
+              <th class=" text-start font-medium text-gray-900">Delete</th>
             </tr>
           </thead>
 
@@ -71,6 +83,14 @@ const AllUsers = () => {
                     }
                   >
                     {user?.isVerified === true ? "Verified" : "Pending"}
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="bg-red-500 px-4 text-white py-2 rounded-md"
+                    onClick={() => handleDeleteUser(user._id)}
+                  >
+                    Delete
                   </button>
                 </td>
               </tr>
