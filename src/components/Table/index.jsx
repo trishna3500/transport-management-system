@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import EditScheduleModal from "../Modal";
 import useAdmin from "../../hooks/useAdmin";
 import { toast } from "react-hot-toast";
-import { FaArrowRight } from "react-icons/fa";
+import { FaLongArrowAltRight } from "react-icons/fa";
 export default function Schedule({ data, special, title, studentFromShohor }) {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
@@ -84,14 +84,14 @@ export default function Schedule({ data, special, title, studentFromShohor }) {
                 )}
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <span className="font-semibold ">{item.busType}</span>
-                  <div className="grid grid-cols-7 gap-0">
+                  <div className="flex justify-between">
                     {item.stopage.map((stopage) => (
-                      <div className="flex">
-                        <h1 className="bg-slate-200 rounded-xl mt-0 ">
+                      <div className="flex justify-evenly">
+                        <h1 className="bg-slate-200 rounded-xl mt-0 px-2 ">
                           {stopage}
                         </h1>
-                        <h1 className="text-xl">
-                          <FaArrowRight />
+                        <h1 className="text-lg mx-3">
+                          <FaLongArrowAltRight />
                         </h1>
                       </div>
                     ))}

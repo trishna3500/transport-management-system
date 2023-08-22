@@ -70,7 +70,7 @@ const AllUsers = () => {
                         : "bg-yellow-300 px-3 py-2  rounded-full"
                     }
                   >
-                    {user?.isVerified === true ? "Verified" : "Approve"}
+                    {user?.isVerified === true ? "Verified" : "Pending"}
                   </button>
                 </td>
               </tr>

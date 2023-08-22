@@ -165,7 +165,7 @@ export default function ViewRequisitionTable({ data }) {
                       onClick={() => handleEditStatus(item._id)}
                       className={
                         item.isVerified === "true"
-                          ? "text-lime-600"
+                          ? "text-green-500"
                           : "text-yellow-700"
                       }
                     >

@@ -10,7 +10,7 @@ export default function HomeContainer() {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
   const [isUser, userData, userRole] = useUser(user?.email);
-  console.log(isUser, userData, userRole.role);
+  console.log(isUser, userData, userRole?.role);
 
   const [busSchedule, setBusSchedule] = useState();
   useEffect(() => {
@@ -232,8 +232,8 @@ export default function HomeContainer() {
             From Town
           </h1>
           {/* Student from Town  */}
-          {(userRole.role === "student" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "student" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={studentFromTown}
@@ -242,8 +242,8 @@ export default function HomeContainer() {
             />
           )}
           {/* Teacher from Town  */}
-          {(userRole.role === "teacher" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "teacher" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={teacherFromTown}
@@ -252,8 +252,8 @@ export default function HomeContainer() {
             />
           )}
           {/* Employee from Town  */}
-          {(userRole.role === "employee" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "employee" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={employeeFromTown}
@@ -266,8 +266,8 @@ export default function HomeContainer() {
             From Campus
           </h1>
           {/* Student from campus */}
-          {(userRole.role === "student" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "student" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={studentFromCampus}
@@ -276,8 +276,8 @@ export default function HomeContainer() {
             />
           )}
           {/* Teacher from campus  */}
-          {(userRole.role === "teacher" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "teacher" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={teacherFromCampus}
@@ -286,8 +286,8 @@ export default function HomeContainer() {
             />
           )}
           {/* Employee from campus  */}
-          {(userRole.role === "employee" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "employee" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={employeeFromCampus}
@@ -295,8 +295,8 @@ export default function HomeContainer() {
               title="For Employee"
             />
           )}
-          {(userRole.role !== "teacher" ||
-            userRole.role === "admin" ||
+          {(userRole?.role !== "teacher" ||
+            userRole?.role === "admin" ||
             !user) && (
             <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
               From Terminal
@@ -304,8 +304,8 @@ export default function HomeContainer() {
           )}
 
           {/* Student from Terminal */}
-          {(userRole.role === "student" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "student" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={studentFromTerminal}
@@ -315,8 +315,8 @@ export default function HomeContainer() {
           )}
 
           {/* Employee from Terminal  */}
-          {(userRole.role === "employee" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "employee" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={employeeFromTerminal}
@@ -334,24 +334,24 @@ export default function HomeContainer() {
             From Town
           </h1>
           {/* Student special Bus From Campus  */}
-          {(userRole.role === "student" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "student" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={weekendBusForStudentsFromTown}
               title="For Students"
             />
           )}
-          {(userRole.role === "teacher" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "teacher" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={weekendBusForTeachersFromTown}
               title="For Teachers"
             />
           )}
-          {(userRole.role === "employee" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "employee" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={weekendBusForEmployeeFromTown}
@@ -362,46 +362,46 @@ export default function HomeContainer() {
           <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
             From Campus
           </h1>
-          {(userRole.role === "student" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "student" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={weekendBusForStudentsFromCampus}
               title="For Students"
             />
           )}
-          {(userRole.role === "teacher" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "teacher" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={weekendBusForTeachersFromCampus}
               title="For Teachers"
             />
           )}
-          {(userRole.role === "employee" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "employee" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={weekendBusForEmployeeFromCampus}
               title="For Employee"
             />
           )}
-          {(userRole !== "teacher" || userRole.role === "admin" || !user) && (
+          {(userRole !== "teacher" || userRole?.role === "admin" || !user) && (
             <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
               From Terminal
             </h1>
           )}
 
-          {(userRole.role === "student" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "student" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={weekendBusForStudentFromTerminal}
               title="For Students"
             />
           )}
-          {(userRole.role === "employee" ||
-            userRole.role === "admin" ||
+          {(userRole?.role === "employee" ||
+            userRole?.role === "admin" ||
             !user) && (
             <Schedule
               data={weekendBusForEmployeeFromTerminal}
