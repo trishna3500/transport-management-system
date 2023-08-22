@@ -14,6 +14,7 @@ import BusInfoLayout from "../Layout/BusInfoLayout";
 import EmployeeSignUp from "../components/UI/EmployeeSignUp";
 import AllUsers from "../components/UI/AllUsers";
 import UserVerification from "../components/UI/UserVerification";
+import MissingUser from "../components/UI/MissingUser";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "/user-verification",
         element: <UserVerification></UserVerification>,
+      },
+      {
+        path: "/missing-user",
+        element: <MissingUser></MissingUser>,
       },
       {
         path: "/all-users",

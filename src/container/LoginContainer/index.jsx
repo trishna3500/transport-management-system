@@ -40,9 +40,24 @@ export default function LoginContainer() {
               ) {
                 navigate("/");
                 toast.success("Signed in successfully");
-              } else {
+              } else if (
+                data?.data[0]?.role === "employee" &&
+                data?.data[0]?.isVerified === true
+              ) {
                 navigate("/");
                 toast.success("Signed in successfully");
+              } else if (
+                data?.data[0]?.role === "teacher" &&
+                data?.data[0]?.isVerified === true
+              ) {
+                navigate("/");
+                toast.success("Signed in successfully");
+              } else if (data?.data[0]?.role === "admin") {
+                navigate("/");
+                toast.success("Signed in successfully");
+              } else {
+                navigate("/missing-user");
+                logout();
               }
             });
         }

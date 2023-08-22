@@ -43,6 +43,7 @@ const AllUsers = () => {
 
   return (
     <div>
+      <h1 className="text-center">All Users</h1>
       <div class="overflow-x-auto mx-20">
         <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
           <thead class="">
