@@ -43,7 +43,9 @@ const AllUsers = () => {
 
   return (
     <div>
-      <h1 className="text-center">All Users</h1>
+      <h1 className="text-center text-4xl italic font-semibold my-10">
+        All Users
+      </h1>
       <div class="overflow-x-auto mx-20">
         <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
           <thead class="">
@@ -72,7 +74,11 @@ const AllUsers = () => {
                   {user.phoneNumber}
                 </td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                  {user?.studentId ? user?.studentId : user?.employeeId}
+                  {user?.studentID
+                    ? user?.studentID
+                    : user?.teacherId
+                    ? user?.teacherId
+                    : user?.employeeId}
                 </td>
                 <td class="whitespace-nowrap px-4 py-2">
                   <button

@@ -19,7 +19,6 @@ const SignUp = () => {
     const password = form.password.value;
     const phoneNumber = form.phoneNumber.value;
     const teacherID = form.teacherID.value;
-    console.log(fullName, email, password, phoneNumber);
 
     const teacherInfo = {
       name: fullName,
@@ -113,7 +112,7 @@ const SignUp = () => {
                 for="FirstName"
                 class="block text-sm font-medium text-gray-700"
               >
-                Teacher Id
+                Teacher's Id
                 <span className="text-red-600 text-lg">*</span>
               </label>
 
