@@ -5,7 +5,7 @@ import EditScheduleModal from "../Modal";
 import useAdmin from "../../hooks/useAdmin";
 import { toast } from "react-hot-toast";
 import { FaLongArrowAltRight } from "react-icons/fa";
-export default function Schedule({ data, special, title, studentFromShohor }) {
+export default function Schedule({ data, special, title }) {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
 
