@@ -2,8 +2,9 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
+import useUser from "../../hooks/useUser";
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -20,10 +21,52 @@ export default function Navbar() {
   const userRequisitions = userHasRequisition.length;
   const { user, logout } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
+  const [role, setUserRole] = useState();
+
+  const [isUser, userData, userRole] = useUser(user?.email);
+  // console.log(isUser, userData, userRole?.role);
+  const [unverifiedUser, setUnverifiedUsers] = useState([]);
+  const [unverifiedRequisitions, setUnverifiedRequisitions] = useState([]);
+  const [busSchedule, setBusSchedule] = useState();
+  const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:5000/api/v1/user-requisition/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setUserHasRequisition(data?.data));
+
+    fetch("http://localhost:5000/api/v1/all-bus")
+      .then((res) => res.json())
+      .then((data) => {
+        setBusSchedule(data);
+      });
+
+    fetch(`http://localhost:5000/api/v1/users/verify/unverified-user`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUnverifiedUsers(data.data);
+      });
+
+    fetch(`http://localhost:5000/api/v1/unverified-requisitions`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUnverifiedRequisitions(data.data);
+      });
+
+    fetch(`http://localhost:5000/api/v1/users/user/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.data[0]?.role === "employee") {
+          setUserRole("employee");
+        } else if (data.data[0]?.role === "student") {
+          setUserRole("student");
+        } else if (data.data[0]?.role === "teacher") {
+          setUserRole("teacher");
+        } else if (data.data[0]?.role === "admin") {
+          setUserRole("admin");
+        }
+        console.log(userRole);
+      });
   }, [user?.email]);
 
   return (
@@ -66,6 +109,60 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
+
+              <div className="flex justify-end">
+                {isAdmin && (
+                  <div className="flex gap-7 mt-3">
+                    <Link to="/add-schedule">
+                      <button className="text-white">Add Schedule</button>
+                    </Link>
+                    <Link to="/teacher-signup">
+                      <button className="text-white">Add Teacher</button>
+                    </Link>
+                    <Link to="/employee-signup">
+                      <button className="text-white">Add Employee</button>
+                    </Link>
+                    <Link to="/all-users">
+                      <button className="text-white">
+                        All Users
+                        <div className="badge badge-error">
+                          {unverifiedUser.length} unverified
+                        </div>
+                      </button>
+                    </Link>
+                  </div>
+                )}
+                {isAdmin && (
+                  <button
+                    className="text-white mr-4 ml-4"
+                    onClick={() =>
+                      navigate(user ? "/view-requisition" : "/requisition")
+                    }
+                  >
+                    Bus Requisitions
+                    <div className="badge badge-error">
+                      {unverifiedRequisitions.length} unverified
+                    </div>
+                  </button>
+                )}
+
+                {user?.email && !isAdmin && (
+                  <Link to="/requisition">
+                    <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
+                      Make Requisition
+                    </button>
+                  </Link>
+                )}
+
+                <button
+                  class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white"
+                  onClick={() => navigate("/dashboard")}
+                >
+                  <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                  <span class="relative">Driver Info</span>
+                </button>
+              </div>
+
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {user?.email && !isAdmin && (
                   <div

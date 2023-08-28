@@ -12,7 +12,7 @@ export default function HomeContainer() {
   const [isUser, userData, userRole] = useUser(user?.email);
   // console.log(isUser, userData, userRole?.role);
   const [unverifiedUser, setUnverifiedUsers] = useState([]);
-
+  const [unverifiedRequisitions, setUnverifiedRequisitions] = useState([]);
   const [busSchedule, setBusSchedule] = useState();
   useEffect(() => {
     fetch("http://localhost:5000/api/v1/all-bus")
@@ -25,6 +25,12 @@ export default function HomeContainer() {
       .then((res) => res.json())
       .then((data) => {
         setUnverifiedUsers(data.data);
+      });
+
+    fetch(`http://localhost:5000/api/v1/unverified-requisitions`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUnverifiedRequisitions(data.data);
       });
 
     fetch(`http://localhost:5000/api/v1/users/user/${user?.email}`)
@@ -44,7 +50,7 @@ export default function HomeContainer() {
       });
   }, []);
   // console.log(role);
-  console.log(unverifiedUser);
+  console.log(unverifiedUser, unverifiedRequisitions);
   const studentFromTown = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Student" &&
@@ -171,7 +177,7 @@ export default function HomeContainer() {
     <div className="bg-stone-100 mt-12">
       <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
-          <div className="flex justify-between mb-20">
+          {/* <div className="flex justify-between mb-20">
             <h2 className="text-4xl font-semibold leading-tight text-center">
               Transport Management System
             </h2>
@@ -179,29 +185,19 @@ export default function HomeContainer() {
               {isAdmin && (
                 <div className="flex gap-4">
                   <Link to="/add-schedule">
-                    <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
-                      <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                      Add Schedule
-                    </button>
+                    <button className="">Add Schedule</button>
                   </Link>
                   <Link to="/teacher-signup">
-                    <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
-                      <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                      Add Teacher
-                    </button>
+                    <button className="">Add Teacher</button>
                   </Link>
                   <Link to="/employee-signup">
-                    <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
-                      <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                      Add Employee
-                    </button>
+                    <button className="">Add Employee</button>
                   </Link>
                   <Link to="/all-users">
-                    <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
-                      <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                    <button className="">
                       All Users
-                      <div className="badge ml-5 badge-error">
-                        {unverifiedUser.length}
+                      <div className="badge ml-2 badge-error">
+                        {unverifiedUser.length} unverified
                       </div>
                     </button>
                   </Link>
@@ -209,20 +205,21 @@ export default function HomeContainer() {
               )}
               {isAdmin && (
                 <button
-                  className="relative rounded px-5  overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300"
+                  className=""
                   onClick={() =>
                     navigate(user ? "/view-requisition" : "/requisition")
                   }
                 >
-                  <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                  View Bus Requisition
+                  Bus Requisitions
+                  <div className="badge badge-error">
+                    {unverifiedRequisitions.length} unverified
+                  </div>
                 </button>
               )}
 
               {user?.email && !isAdmin && (
                 <Link to="/requisition">
                   <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
-                    <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                     Make Requisition
                   </button>
                 </Link>
@@ -236,7 +233,7 @@ export default function HomeContainer() {
                 <span class="relative">Driver Info</span>
               </button>
             </div>
-          </div>
+          </div> */}
           <h1 className="text-5xl font-medium text-center -mt-10 mb-5">
             Week Days Schedule
           </h1>
