@@ -37,6 +37,7 @@ export default function RequisitionContainer() {
     const starting_time = form.starting_time.value;
     const ending_time = form.ending_time.value;
     const purpose = form.purpose.value;
+    const destination = form.destination.value;
     const requisitionData = {
       name: name,
       id: sid,
@@ -52,6 +53,7 @@ export default function RequisitionContainer() {
       starting_time: starting_time,
       ending_time: ending_time,
       purpose: purpose,
+      destination: destination,
     };
     console.log(requisitionData);
     fetch(`http://localhost:5000/api/v1/add-requisition`, {
@@ -153,6 +155,13 @@ export default function RequisitionContainer() {
               onChange={(e) => setDept(e.target.value)}
             />
           </div>
+          <input
+            type="text"
+            name="destination"
+            required
+            className="w-full border"
+            placeholder="Destination"
+          />
           {userData?.role === "student" && (
             <div>
               <input

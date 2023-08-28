@@ -94,6 +94,9 @@ export default function ViewRequisitionTable({ data }) {
                 Reason
               </th>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Destination
+              </th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Status
               </th>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
@@ -157,7 +160,12 @@ export default function ViewRequisitionTable({ data }) {
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                      {item.reason}
+                      {item.reason.slice(0, 50)}
+                    </p>
+                  </td>
+                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
+                      {item.destination}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
