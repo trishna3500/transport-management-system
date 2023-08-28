@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { toast } from "react-hot-toast";
 
 export default function EditScheduleModal({ isOpen, closeModal, data }) {
-  console.log(data);
+  // console.log(data);
   function handleEditSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -20,7 +20,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
       day: day || data?.day,
       location: location || data?.location,
     };
-    console.log(updatedInfo);
+    // console.log(updatedInfo);
     fetch(`http://localhost:5000/api/v1/edit-schedule/${data._id}`, {
       method: "PATCH",
       headers: {
@@ -30,7 +30,7 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         toast.success("Updated Bus Schedule");
       });
   }
@@ -83,7 +83,6 @@ export default function EditScheduleModal({ isOpen, closeModal, data }) {
                               <option value="Student">Student</option>
                               <option value="Teacher">Teacher</option>
                               <option value="Employee">Employee</option>
-                              
                             </select>
                           </div>
                           <div>

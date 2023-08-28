@@ -152,7 +152,13 @@ const BusInfoLayout = () => {
           <div className=" flex justify-center items-center mt-10 ">
             <div>
               <h1 className="text-center text-3xl font-bold">Bus Details</h1>
-              <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsJY88yOFDi2bw0QkEVXsdWussxYOVBe5LRA&usqp=CAU"} alt="" className="h-60 w-96" />
+              <img
+                src={
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsJY88yOFDi2bw0QkEVXsdWussxYOVBe5LRA&usqp=CAU"
+                }
+                alt=""
+                className="h-60 w-96"
+              />
               <h1 className="text-lg font-medium">
                 Bus Number: {busDetails?.bNumber}
               </h1>

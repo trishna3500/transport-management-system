@@ -8,7 +8,7 @@ const AllUsers = () => {
       .then((res) => res.json())
       .then((data) => setAllUsers(data.data));
   }, []);
-  console.log(allUsers);
+  // console.log(allUsers);
 
   const handleVerifyUser = (id) => {
     const updatedInfo = {
@@ -23,7 +23,7 @@ const AllUsers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         toast.success("User Verified Successfully");
         window.location.reload();
       });
@@ -35,7 +35,7 @@ const AllUsers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         toast.success("User has been deleted");
         window.location.reload();
       });

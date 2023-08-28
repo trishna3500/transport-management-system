@@ -31,7 +31,7 @@ const SignUp = () => {
 
     userSignUp(email, password)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         const user = result.user;
         if (user?.email) {
           fetch(`http://localhost:5000/api/v1/user`, {
@@ -43,7 +43,7 @@ const SignUp = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
+              // console.log(data);
               if (data.success === true) {
                 fetch(`http://localhost:5000/api/v1/users/user/${user?.email}`)
                   .then((res) => res.json())

@@ -18,7 +18,7 @@ const EmployeeSignUp = () => {
     const password = form.password.value;
     const phoneNumber = form.phoneNumber.value;
     const employeeID = form.employeeID.value;
-    console.log(fullName, email, password, phoneNumber);
+    // console.log(fullName, email, password, phoneNumber);
 
     const EmployeeInfo = {
       name: fullName,
@@ -27,10 +27,10 @@ const EmployeeSignUp = () => {
       employeeId: employeeID,
       phoneNumber: phoneNumber,
       password: password,
-      isVerified: true
+      isVerified: true,
     };
 
-    console.log(EmployeeInfo);
+    // console.log(EmployeeInfo);
 
     fetch(`http://localhost:5000/api/v1/user`, {
       method: "POST",
@@ -45,7 +45,7 @@ const EmployeeSignUp = () => {
     userSignUp(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         updateProfile(auth.currentUser, {
           displayName: fullName,
         }).catch((error) => console.log(error));

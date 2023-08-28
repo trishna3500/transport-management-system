@@ -30,7 +30,7 @@ const SignUp = () => {
       isVerified: true,
     };
 
-    console.log(teacherInfo);
+    // console.log(teacherInfo);
 
     fetch(`http://localhost:5000/api/v1/user`, {
       method: "POST",
@@ -45,7 +45,7 @@ const SignUp = () => {
     userSignUp(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         updateProfile(auth.currentUser, {
           displayName: fullName,
         }).catch((error) => console.log(error));

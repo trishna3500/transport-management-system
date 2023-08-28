@@ -16,7 +16,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [userHasRequisition, setUserHasRequisition] = useState([]);
-  console.log(userHasRequisition);
+  // console.log(userHasRequisition);
   const userRequisitions = userHasRequisition.length;
   const { user, logout } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);

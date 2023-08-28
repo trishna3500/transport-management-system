@@ -19,7 +19,7 @@ export default function ViewRequisitionTable({ data }) {
 
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
-  console.log(user, isAdmin);
+  // console.log(user, isAdmin);
   const [status, setStatus] = useState(true);
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/api/v1/delete-requisition/${id}`, {
@@ -27,7 +27,7 @@ export default function ViewRequisitionTable({ data }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         toast.success("Requisition successfully deleted");
         window.location.reload();
       });
@@ -45,7 +45,7 @@ export default function ViewRequisitionTable({ data }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         window.location.reload();
         toast.success("Updated User Status");
         setStatus(false);

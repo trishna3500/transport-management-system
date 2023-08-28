@@ -17,7 +17,7 @@ export default function Schedule({ data, special, title }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
         toast.success("Deleted Schedule");
         window.location.reload();
       });

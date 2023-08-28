@@ -10,7 +10,8 @@ export default function HomeContainer() {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
   const [isUser, userData, userRole] = useUser(user?.email);
-  console.log(isUser, userData, userRole?.role);
+  // console.log(isUser, userData, userRole?.role);
+  const [unverifiedUser, setUnverifiedUsers] = useState([]);
 
   const [busSchedule, setBusSchedule] = useState();
   useEffect(() => {
@@ -19,10 +20,17 @@ export default function HomeContainer() {
       .then((data) => {
         setBusSchedule(data);
       });
+
+    fetch(`http://localhost:5000/api/v1/users/verify/unverified-user`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUnverifiedUsers(data.data);
+      });
+
     fetch(`http://localhost:5000/api/v1/users/user/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.data[0]?.role === "employee") {
           setUserRole("employee");
         } else if (data.data[0]?.role === "student") {
@@ -35,7 +43,8 @@ export default function HomeContainer() {
         console.log(userRole);
       });
   }, []);
-  console.log(role);
+  // console.log(role);
+  console.log(unverifiedUser);
   const studentFromTown = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Student" &&
@@ -191,6 +200,9 @@ export default function HomeContainer() {
                     <button className="relative rounded px-5 py-2.5 overflow-hidden group bg-green-500 hover:bg-gradient-to-r hover:from-green-500 hover:to-green-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-green-400 transition-all ease-out duration-300">
                       <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                       All Users
+                      <div className="badge ml-5 badge-error">
+                        {unverifiedUser.length}
+                      </div>
                     </button>
                   </Link>
                 </div>
