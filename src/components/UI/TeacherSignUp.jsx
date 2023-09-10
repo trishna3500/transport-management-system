@@ -57,7 +57,7 @@ const SignUp = () => {
   return (
     <div className="flex">
       <img
-        src="https://images.pexels.com/photos/3184642/pexels-photo-3184642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        src="https://w7.pngwing.com/pngs/477/457/png-transparent-man-teaching-mathematic-illustration-student-teacher-classroom-mathematics-teacher-class-child-class-cartoon.png"
         alt=""
         className="w-2/3 min-h-screen "
       />

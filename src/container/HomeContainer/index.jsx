@@ -88,24 +88,28 @@ export default function HomeContainer() {
       bus.location === "fromcampus" &&
       bus.day === "Sunday to Thursday"
   );
+  /*
   const teacherFromCampusToTerminal = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Teacher" &&
       bus.location === "fromCampusToTerminal" &&
       bus.day === "Sunday to Thursday"
   );
+  */
   const employeeFromCampus = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Employee" &&
       bus.location === "fromcampus" &&
       bus.day === "Sunday to Thursday"
   );
+  /*
   const employeeFromCampusToTerminal = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Employee" &&
       bus.location === "fromCampusToTerminal" &&
       bus.day === "Sunday to Thursday"
   );
+  */
   const weekendBusForStudentsFromCampus = busSchedule?.data?.filter(
     (bus) =>
       bus.day !== "Sunday to Thursday" &&
@@ -124,24 +128,28 @@ export default function HomeContainer() {
       bus.busType === "Teacher" &&
       bus.location === "fromcampus"
   );
+  /*
   const weekendBusForTeachersFromCampusToTerminal = busSchedule?.data?.filter(
     (bus) =>
       bus.day !== "Sunday to Thursday" &&
       bus.busType === "Teacher" &&
       bus.location === "fromCampusToTerminal"
   );
+  */
   const weekendBusForEmployeeFromCampus = busSchedule?.data?.filter(
     (bus) =>
       bus.day !== "Sunday to Thursday" &&
       bus.busType === "Employee" &&
       bus.location === "fromcampus"
   );
+  /*
   const weekendBusForEmployeeFromCampusToTerminal = busSchedule?.data?.filter(
     (bus) =>
       bus.day !== "Sunday to Thursday" &&
       bus.busType === "Employee" &&
       bus.location === "fromCampusToTerminal"
   );
+  */
   const weekendBusForStudentsFromTown = busSchedule?.data?.filter(
     (bus) =>
       bus.day !== "Sunday to Thursday" &&
@@ -174,6 +182,7 @@ export default function HomeContainer() {
       bus.location === "fromTerminal" &&
       bus.day === "Sunday to Thursday"
   );
+
   const weekendBusForStudentFromTerminal = busSchedule?.data?.filter(
     (bus) =>
       bus.busType === "Student" &&
@@ -187,6 +196,7 @@ export default function HomeContainer() {
       bus.location === "fromTerminal" &&
       bus.day !== "Sunday to Thursday"
   );
+
 
   // console.log(
   //   weekendBusForStudentFromTerminal,
@@ -339,15 +349,8 @@ export default function HomeContainer() {
               title="For Teachers"
             />
           )}
-          {(userRole?.role === "teacher" ||
-            userRole?.role === "admin" ||
-            !user) && (
-            <Schedule
-              data={teacherFromCampusToTerminal}
-              special={false}
-              title="From Campus to Terminal For Teacher"
-            />
-          )}
+          
+          
           {/* Employee from campus  */}
           {(userRole?.role === "employee" ||
             userRole?.role === "admin" ||
@@ -358,15 +361,7 @@ export default function HomeContainer() {
               title="For Employee"
             />
           )}
-          {(userRole?.role === "employee" ||
-            userRole?.role === "admin" ||
-            !user) && (
-            <Schedule
-              data={employeeFromCampusToTerminal}
-              special={false}
-              title="From Campus to Terminal For Employee"
-            />
-          )}
+          
           {(userRole?.role !== "teacher" ||
             userRole?.role === "admin" ||
             !user) && (
@@ -386,8 +381,8 @@ export default function HomeContainer() {
             />
           )}
 
-          {/* Employee from Terminal  */}
-          {(userRole?.role === "employee" ||
+           {/* Employee from Terminal */}
+           {(userRole?.role === "employee" ||
             userRole?.role === "admin" ||
             !user) && (
             <Schedule
@@ -396,6 +391,8 @@ export default function HomeContainer() {
               title="For Employee"
             />
           )}
+
+          
 
           {/* special trip  */}
 
@@ -439,7 +436,7 @@ export default function HomeContainer() {
             !user) && (
             <Schedule
               data={weekendBusForStudentsFromCampus}
-              title="From Campus To Terminal For Students"
+              title="From Campus"
             />
           )}
           {(userRole?.role === "student" ||
@@ -458,14 +455,7 @@ export default function HomeContainer() {
               title="For Teachers"
             />
           )}
-          {(userRole?.role === "teacher" ||
-            userRole?.role === "admin" ||
-            !user) && (
-            <Schedule
-              data={weekendBusForTeachersFromCampusToTerminal}
-              title="From Campus To Terminal For Teachers"
-            />
-          )}
+          
           {(userRole?.role === "employee" ||
             userRole?.role === "admin" ||
             !user) && (
@@ -474,14 +464,7 @@ export default function HomeContainer() {
               title="For Employee"
             />
           )}
-          {(userRole?.role === "employee" ||
-            userRole?.role === "admin" ||
-            !user) && (
-            <Schedule
-              data={weekendBusForEmployeeFromCampusToTerminal}
-              title="For Employee"
-            />
-          )}
+         
           {(userRole !== "teacher" || userRole?.role === "admin" || !user) && (
             <h1 className="text-center font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 ">
               From Terminal
@@ -504,6 +487,7 @@ export default function HomeContainer() {
               title="For Employee"
             />
           )}
+         
         </div>
       </div>
     </div>
